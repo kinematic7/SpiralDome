@@ -1,44 +1,46 @@
-﻿const LoginContainer = document.getElementById("LoginPanel");
+﻿var LoginContainer = document.getElementById("LoginPanel");
+var _self = null;
 
 class LoginPanel extends React.Component {
 
     constructor(props) {
         super(props);
-        this.LoginModel = {
+        _self = this;
+        _self.LoginModel = {
             LoginId: "",
             Password: ""
         }
-        this.loginService = new LoginService();
+        _self.loginService = new LoginService();
     }
 
     render() {
         return (
             <React.Fragment>
                 <h3>User Registration</h3>
-                <input name="LoginId" value={this.LoginId} onChange={this.bindData} type="text" className="form-control" placeholder="Login Id" />
-                <input name="Password" value={this.Password} onChange={this.bindData} type="password" className="form-control" placeholder="Password" />
+                <input name="LoginId" value={_self.LoginId} onChange={_self.bindData} type="text" className="form-control" placeholder="Login Id" />
+                <input name="Password" value={_self.Password} onChange={_self.bindData} type="password" className="form-control" placeholder="Password" />
                 <br />
-                <button onClick={this.LoginActionClick} className="btn btn-primary">Login</button>
+                <button onClick={_self.LoginActionClick} className="btn btn-primary">Login</button>
                 &nbsp;
-                <button onClick={this.RegistrationActionClick} className="btn btn-success">New Registration</button>
+                <button onClick={_self.RegistrationActionClick} className="btn btn-success">New Registration</button>
             </React.Fragment>
             );
     }
 
     bindData = (e) => {
-        this.LoginModel[e.target.name] = e.target.value;
-        this.setState({ [e.target.name]: e.target.value });
+        _self.LoginModel[e.target.name] = e.target.value;
+        _self.setState({ [e.target.name]: e.target.value });
     }
 
     LoginActionClick = (e) => {
-        alert(this.LoginModel.LoginId + " " + this.LoginModel.Password );
-        this.loginService.IsValidLogin(function (result) {
+        alert(_self.LoginModel.LoginId + " " + _self.LoginModel.Password );
+        _self.loginService.IsValidLogin(function (result) {
             alert(result);
         });
     }
 
     RegistrationActionClick = (e) => {
-        alert("Go to registration");
+        window.location.href = "../Home/Register";
     }
  
 }

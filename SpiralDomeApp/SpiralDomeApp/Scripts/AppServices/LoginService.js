@@ -1,6 +1,6 @@
 ﻿class LoginService {
 
-    InsertLogin(loginObj, callback) {
+    InsertLogin = (loginObj, callback) => {
 
         $.post("../Home/InsertLogin", loginObj, function(result) {
             callback(result);
