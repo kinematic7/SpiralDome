@@ -22,7 +22,7 @@ class RegistrationPanel extends React.Component {
                 <button onClick={this.RegistrationEventClick} className="btn btn-primary">Register</button>
                 &nbsp;
                 <button onClick={this.BacktoLoginEventClick} className="btn btn-success">Back to Login</button>
-                <br/>
+                <br/> &nbsp;
                 <div name="ErrorMessage" className="alert alert-danger" hidden></div>
                 <div name="SuccessMessage" className="alert alert-success" hidden></div>
             </React.Fragment>
@@ -52,6 +52,7 @@ class RegistrationPanel extends React.Component {
                 this.SetControlValue("ConfirmPassword", "");
             }
             else {
+                successAlert.show();
                 successAlert.html("You are now registered!");
             }
         });
