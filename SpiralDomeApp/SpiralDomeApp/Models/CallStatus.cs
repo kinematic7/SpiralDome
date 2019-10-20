@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace SpiralDomeApp.Models
 {
@@ -9,5 +10,6 @@ namespace SpiralDomeApp.Models
     {
         public bool IsSuccess { get; set; }
         public string Message { get; set; }
+        public JsonResult JsonObject { get; set; }
     }
 }

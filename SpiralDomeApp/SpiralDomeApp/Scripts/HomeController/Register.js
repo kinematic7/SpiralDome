@@ -47,17 +47,17 @@ class RegistrationPanel extends React.Component {
         var loginService = new LoginService();
 
         loginService.InsertLogin(_self.RegistrationModel, function(result) {
-            if (result.IsSuccess != true) {
+            if (result.IsSuccess) {
+                successAlert.show();
+                successAlert.html("You are now registered!");
+                _self.FindControl("btnRegister").prop("disabled", true);
+            }
+            else {
                 failAlert.show();
                 failAlert.html(result.Message);
                 _self.SetControlValue("LoginId", "");
                 _self.SetControlValue("Password", "");
                 _self.SetControlValue("ConfirmPassword", "");
-            }
-            else {
-                successAlert.show();
-                successAlert.html("You are now registered!");
-                _self.FindControl("btnRegister").prop("disabled", true);
             }
         });
     }

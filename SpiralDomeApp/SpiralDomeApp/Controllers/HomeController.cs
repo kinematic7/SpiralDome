@@ -63,7 +63,7 @@ namespace SpiralDomeApp.Controllers
         }
 
         [HttpPost]
-        public JsonResult IsValidUser(Login login)
+        public JsonResult IsValidLogin(Login login)
         {
             var result = new CallStatus();
 
@@ -71,18 +71,30 @@ namespace SpiralDomeApp.Controllers
             {
                 using (var context = new SpiralDomeDbContext())
                 {
-                    var isUserExists = (from user in context.Logins
-                                        where user.LoginId == login.LoginId.Trim()
-                                        select user).SingleOrDefault() != null;
+                    var loginObj = (from user in context.Logins
+                                        where user.LoginId == login.LoginId.Trim() 
+                                           && user.Password == login.Password
+                                        select user).SingleOrDefault();
+
+                    var isUserExists = loginObj != null;
 
                     if (isUserExists)
                     {
+                        loginObj.LastModified = DateTime.UtcNow;
+                        loginObj.Token = DateTime.Now.Ticks.ToString();
+
+                        context.SaveChanges();
+
+                        loginObj.LastModified = null;
+                        loginObj.Password = null;
+
                         result.IsSuccess = true;
-                        result.Message = "token";
+                        result.Message = "";
+                        result.JsonObject = Json(loginObj);
                     }
                     else
                     {
-                        throw new Exception("Inalid Username or Password");
+                        throw new Exception("Invalid Username or Password");
                     }
                 }
             }

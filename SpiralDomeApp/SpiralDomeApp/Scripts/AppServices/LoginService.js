@@ -7,4 +7,11 @@
         });
 
     }
+
+    IsValidLogin = (loginObj, callback) => {
+
+        $.post("../Home/IsValidLogin", loginObj, function (result) {
+            callback(result);
+        });
+    }
 }

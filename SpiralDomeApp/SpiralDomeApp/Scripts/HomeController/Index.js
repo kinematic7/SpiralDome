@@ -35,9 +35,18 @@ class LoginPanel extends React.Component {
     }
 
     LoginActionClick = (e) => {
-        alert(_self.LoginModel.LoginId + " " + _self.LoginModel.Password );
-        _self.loginService.IsValidLogin(function (result) {
-            alert(result);
+
+        localStorage.clear();
+        var loginService = new LoginService();
+
+        loginService.IsValidLogin(_self.LoginModel, function (result) {
+            if (result.IsSuccess) {
+                localStorage.setItem("LoginId", result.JsonObject.Data.LoginId);
+                localStorage.setItem("Token", result.JsonObject.Data.Token);
+            }
+            else {
+                alert(result.Message);
+            }
         });
     }
 

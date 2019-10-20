@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SpiralDomeApp.Models
@@ -23,6 +24,10 @@ namespace SpiralDomeApp.Models
 
         [NotMapped]
         public string ConfirmPassword { get; set; }
+
+        public string Token { get; set; }
+
+        public DateTime? LastModified { get; set; }
 
     }
 }
