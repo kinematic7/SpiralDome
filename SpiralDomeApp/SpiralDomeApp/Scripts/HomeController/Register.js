@@ -20,11 +20,13 @@ class RegistrationPanel extends React.Component {
                 <input name="LoginId" type="text" value={_self.RegistrationModel.LoginId} onChange={_self.bind_RegistrationModel} className="form-control" placeholder="Login ID"  />
                 <input name="Password" type="password" value={_self.RegistrationModel.Password} onChange={_self.bind_RegistrationModel} className="form-control" placeholder="Password" />
                 <input name="ConfirmPassword" type="password" value={_self.RegistrationModel.ConfirmPassword} onChange={_self.bind_RegistrationModel} className="form-control" placeholder="Confirm Password" />
+                <div>
                 <br/>
-                <button name="btnRegister" onClick={_self.RegistrationEventClick} className="btn btn-primary">Register</button>
-                &nbsp;
-                <button onClick={_self.BacktoLoginEventClick} className="btn btn-success">Back to Login</button>
-                <br/> &nbsp;
+                    <button name="btnRegister" onClick={_self.RegistrationEventClick} className="btn btn-primary">Register</button>
+                    &nbsp;
+                    <button onClick={_self.BacktoLoginEventClick} className="btn btn-success">Back to Login</button>
+                </div>
+                <br /> &nbsp;
                 <div name="ErrorMessage" className="alert alert-danger" hidden></div>
                 <div name="SuccessMessage" className="alert alert-success" hidden></div>
             </React.Fragment>

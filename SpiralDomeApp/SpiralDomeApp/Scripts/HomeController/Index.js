@@ -16,13 +16,15 @@ class LoginPanel extends React.Component {
     render() {
         return (
             <React.Fragment>
-                <h3>User Registration</h3>
+                <h3>User Login</h3>
                 <input name="LoginId" value={_self.LoginId} onChange={_self.bindData} type="text" className="form-control" placeholder="Login Id" />
                 <input name="Password" value={_self.Password} onChange={_self.bindData} type="password" className="form-control" placeholder="Password" />
-                <br />
-                <button onClick={_self.LoginActionClick} className="btn btn-primary">Login</button>
-                &nbsp;
-                <button onClick={_self.RegistrationActionClick} className="btn btn-success">New Registration</button>
+                <div>
+                    <br />
+                    <button onClick={_self.LoginActionClick} className="btn btn-primary">Login</button>
+                    &nbsp;
+                    <button onClick={_self.RegistrationActionClick} className="btn btn-success">New Registration</button>
+                </div>           
             </React.Fragment>
             );
     }
