@@ -27,20 +27,20 @@ namespace SpiralDomeApp.Controllers
             {
                 try
                 {
-                    if(login.Password!= login.ConfirmPassword)
+                    if (login.Password != login.ConfirmPassword)
                     {
                         throw new Exception("Passwords do not match");
                     }
 
                     var isUserExists = (from user in context.Logins
                                             where user.LoginId == login.LoginId.Trim()
-                                       select user).SingleOrDefault() != null;
+                                        select user).SingleOrDefault() != null;
 
                     if(isUserExists)
                     {
                         throw new Exception("Login Id is already taken, please try again.");
                     }
-                    
+
                     context.Logins.Add(login);
                     context.SaveChanges();
                     result.IsSuccess = true;
