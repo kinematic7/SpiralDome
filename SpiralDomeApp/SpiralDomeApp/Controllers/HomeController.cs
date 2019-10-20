@@ -22,21 +22,21 @@ namespace SpiralDomeApp.Controllers
         public JsonResult InsertLogin(Login login)
         {
             var result = new CallStatus();
-
-            using (var context = new SpiralDomeDbContext())
+            try
             {
-                try
+                using (var context = new SpiralDomeDbContext())
                 {
+
                     if (login.Password != login.ConfirmPassword)
                     {
                         throw new Exception("Passwords do not match");
                     }
 
                     var isUserExists = (from user in context.Logins
-                                            where user.LoginId == login.LoginId.Trim()
+                                        where user.LoginId == login.LoginId.Trim()
                                         select user).SingleOrDefault() != null;
 
-                    if(isUserExists)
+                    if (isUserExists)
                     {
                         throw new Exception("Login Id is already taken, please try again.");
                     }
@@ -45,17 +45,57 @@ namespace SpiralDomeApp.Controllers
                     context.SaveChanges();
                     result.IsSuccess = true;
                 }
-                catch (DbEntityValidationException e)
-                {            
-                    result.IsSuccess = false;
-                    result.Message = Helper.ErrorMessage.GetValidationMessage(e);
-                }
-                catch(Exception ex)
+                  
+
+            }
+            catch (DbEntityValidationException e)
+            {
+                result.IsSuccess = false;
+                result.Message = Helper.ErrorMessage.GetValidationMessage(e);
+            }
+            catch (Exception ex)
+            {
+                result.IsSuccess = false;
+                result.Message = ex.Message;
+            }
+
+            return Json(result);
+        }
+
+        [HttpPost]
+        public JsonResult IsValidUser(Login login)
+        {
+            var result = new CallStatus();
+
+            try
+            {
+                using (var context = new SpiralDomeDbContext())
                 {
-                    result.IsSuccess = false;
-                    result.Message = ex.Message;
+                    var isUserExists = (from user in context.Logins
+                                        where user.LoginId == login.LoginId.Trim()
+                                        select user).SingleOrDefault() != null;
+
+                    if (isUserExists)
+                    {
+                        result.IsSuccess = true;
+                        result.Message = "token";
+                    }
+                    else
+                    {
+                        throw new Exception("Inalid Username or Password");
+                    }
                 }
-             }
+            }
+            catch (DbEntityValidationException e)
+            {
+                result.IsSuccess = false;
+                result.Message = Helper.ErrorMessage.GetValidationMessage(e);
+            }
+            catch (Exception ex)
+            {
+                result.IsSuccess = false;
+                result.Message = ex.Message;
+            }
 
             return Json(result);
         }
