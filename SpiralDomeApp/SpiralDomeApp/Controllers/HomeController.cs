@@ -2,6 +2,7 @@
 using System;
 using System.Data.Entity.Validation;
 using System.Web.Mvc;
+using System.Linq;
 
 namespace SpiralDomeApp.Controllers
 {
@@ -30,6 +31,16 @@ namespace SpiralDomeApp.Controllers
                     {
                         throw new Exception("Passwords do not match");
                     }
+
+                    var isUserExists = (from user in context.Logins
+                                            where user.LoginId == login.LoginId.Trim()
+                                       select user).SingleOrDefault() != null;
+
+                    if(isUserExists)
+                    {
+                        throw new Exception("Login Id is already taken, please try again.");
+                    }
+                    
                     context.Logins.Add(login);
                     context.SaveChanges();
                     result.IsSuccess = true;
