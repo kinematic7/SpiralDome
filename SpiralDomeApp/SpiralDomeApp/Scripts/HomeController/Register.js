@@ -39,6 +39,11 @@ class RegistrationPanel extends React.Component {
         this.setState({ [e.target.name]: e.target.value });
     }
 
+    SetControlValue = (name, value) => {
+        this.RegistrationModel[name] = value;
+        this.setState({ [name]: value });
+    }
+
     RegistrationEventClick = (e) => {
 
         var self = this;
@@ -63,11 +68,6 @@ class RegistrationPanel extends React.Component {
                 parent.find('[name="ErrorMessage"]').html(result.Message);
             }
         });
-    }
-
-    SetControlValue = (name, value) => {
-        this.RegistrationModel[name] = value;
-        this.setState({ [name]: value});
     }
 
     BacktoLoginEventClick = (e) => {
