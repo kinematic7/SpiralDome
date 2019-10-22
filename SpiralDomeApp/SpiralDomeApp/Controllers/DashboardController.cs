@@ -9,7 +9,7 @@ namespace SpiralDomeApp.Controllers
     public class DashboardController : Controller
     {
         // GET: Dashboard
-        public ActionResult Index()
+        public ActionResult Account()
         {
             return View();
         }

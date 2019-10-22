@@ -48,7 +48,7 @@ class LoginPanel extends React.Component {
             if (result.IsSuccess) {
                 localStorage.setItem("LoginId", result.JsonObject.Data.LoginId);
                 localStorage.setItem("Token", result.JsonObject.Data.Token);
-                window.location.href = "../Dashboard/Index";
+                window.location.href = "../Dashboard/Account";
             }
             else {
                 $(self.refErrorMessage.current).show().html(result.Message);

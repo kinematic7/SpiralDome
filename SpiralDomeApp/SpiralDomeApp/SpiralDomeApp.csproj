@@ -106,6 +106,7 @@
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
+    <Content Include="Scripts\DashboardController\TopMenu.js" />
     <Content Include="Scripts\HomeController\Index.js" />
     <Content Include="Scripts\HomeController\Register.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
@@ -172,7 +173,7 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.3.1.min.map" />
-    <Content Include="Views\Dashboard\Index.cshtml" />
+    <Content Include="Views\Dashboard\Account.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
