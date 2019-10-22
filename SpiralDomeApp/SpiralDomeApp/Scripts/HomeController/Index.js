@@ -25,6 +25,8 @@ class LoginPanel extends React.Component {
                     &nbsp;
                     <button onClick={_self.RegistrationActionClick} className="btn btn-success">New Registration</button>
                 </div>           
+                <div name="ErrorMessage" className="alert alert-danger" hidden></div>
+                <div name="SuccessMessage" className="alert alert-success" hidden></div>
             </React.Fragment>
             );
     }
@@ -43,6 +45,7 @@ class LoginPanel extends React.Component {
             if (result.IsSuccess) {
                 localStorage.setItem("LoginId", result.JsonObject.Data.LoginId);
                 localStorage.setItem("Token", result.JsonObject.Data.Token);
+                window.location.href = "../Dashboard/Index";
             }
             else {
                 alert(result.Message);

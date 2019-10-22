@@ -1,74 +1,73 @@
-﻿var rootNode = document.getElementById("Home.Register");
-var RegistrationComponent = document.getElementById("RegistrationPanel");
-var _self = null;
+﻿var RegistrationComponent = document.getElementById("RegistrationPanel");
 
 class RegistrationPanel extends React.Component {
 
     constructor(props) {
         super(props);
-        _self = this;
-        _self.RegistrationModel =
+        this.RegistrationModel =
             {
                 LoginId: "", Password: "", ConfirmPassword : ""
             };
+        this.id = new Date().getTime();
     }
 
     render() {
         return (
             <React.Fragment>
+                <div id={this.id}>
                 <h3>User Registration</h3>
-                <input name="LoginId" type="text" value={_self.RegistrationModel.LoginId} onChange={_self.bind_RegistrationModel} className="form-control" placeholder="Login ID"  />
-                <input name="Password" type="password" value={_self.RegistrationModel.Password} onChange={_self.bind_RegistrationModel} className="form-control" placeholder="Password" />
-                <input name="ConfirmPassword" type="password" value={_self.RegistrationModel.ConfirmPassword} onChange={_self.bind_RegistrationModel} className="form-control" placeholder="Confirm Password" />
+                <input name="LoginId" type="text" value={this.RegistrationModel.LoginId} onChange={this.bind_RegistrationModel} className="form-control" placeholder="Login ID"  />
+                <input name="Password" type="password" value={this.RegistrationModel.Password} onChange={this.bind_RegistrationModel} className="form-control" placeholder="Password" />
+                <input name="ConfirmPassword" type="password" value={this.RegistrationModel.ConfirmPassword} onChange={this.bind_RegistrationModel} className="form-control" placeholder="Confirm Password" />
                 <div>
                 <br/>
-                    <button name="btnRegister" onClick={_self.RegistrationEventClick} className="btn btn-primary">Register</button>
+                    <button name="btnRegister" onClick={this.RegistrationEventClick} className="btn btn-primary">Register</button>
                     &nbsp;
-                    <button onClick={_self.BacktoLoginEventClick} className="btn btn-success">Back to Login</button>
+                    <button onClick={this.BacktoLoginEventClick} className="btn btn-success">Back to Login</button>
                 </div>
                 <br /> &nbsp;
-                <div name="ErrorMessage" className="alert alert-danger" hidden></div>
-                <div name="SuccessMessage" className="alert alert-success" hidden></div>
+                
+                 <div name="ErrorMessage" className="alert alert-danger" hidden ></div>
+                 <div name="SuccessMessage" className="alert alert-success" hidden></div>
+                </div>       
             </React.Fragment>
         );
     }
 
     bind_RegistrationModel = (e) => {
-        _self.RegistrationModel[e.target.name] = e.target.value;
-        _self.setState({ [e.target.name]: e.target.value });
+        this.RegistrationModel[e.target.name] = e.target.value;
+        this.setState({ [e.target.name]: e.target.value });
     }
 
     RegistrationEventClick = (e) => {
-        var successAlert = _self.FindControl("SuccessMessage");
-        var failAlert = _self.FindControl("ErrorMessage");
-        failAlert.hide();
-        successAlert.hide();
+
+        var self = this;
+        var parent = $("#" + self.id);
+        parent.find('[name="ErrorMessage"]').hide();
+        parent.find('[name="SuccessMessage"]').hide();
 
         var loginService = new LoginService();
 
-        loginService.InsertLogin(_self.RegistrationModel, function(result) {
+        loginService.InsertLogin(this.RegistrationModel, function (result) {
+          
             if (result.IsSuccess) {
-                successAlert.show();
-                successAlert.html("You are now registered!");
-                _self.FindControl("btnRegister").prop("disabled", true);
+                parent.find('[name="SuccessMessage"]').show();
+                parent.find('[name="SuccessMessage"]').html("You are now registered!");
+                parent.find('[name=btnRegister]').prop("disabled", true);
+
             }
             else {
-                failAlert.show();
-                failAlert.html(result.Message);
-                _self.SetControlValue("LoginId", "");
-                _self.SetControlValue("Password", "");
-                _self.SetControlValue("ConfirmPassword", "");
+                self.SetControlValue("LoginId", "");
+                self.SetControlValue("Password", "");
+                parent.find('[name="ErrorMessage"]').show();
+                parent.find('[name="ErrorMessage"]').html(result.Message);
             }
         });
     }
 
-    FindControl = (name) => {
-        return $(rootNode).find("[name=" + name + "]");
-    }
-
     SetControlValue = (name, value) => {
-        _self.RegistrationModel[name] = value;
-        _self.setState({ [name]: value});
+        this.RegistrationModel[name] = value;
+        this.setState({ [name]: value});
     }
 
     BacktoLoginEventClick = (e) => {
