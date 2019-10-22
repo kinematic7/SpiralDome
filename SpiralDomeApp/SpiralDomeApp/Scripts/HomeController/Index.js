@@ -1,54 +1,61 @@
 ﻿var LoginContainer = document.getElementById("LoginPanel");
-var _self = null;
 
 class LoginPanel extends React.Component {
 
     constructor(props) {
         super(props);
-        _self = this;
-        _self.LoginModel = {
+        this.LoginModel = {
             LoginId: "",
             Password: ""
         }
-        _self.loginService = new LoginService();
+        this.loginService = new LoginService();
+        this.id = new Date().getTime();
     }
 
     render() {
         return (
             <React.Fragment>
-                <h3>User Login</h3>
-                <input name="LoginId" value={_self.LoginId} onChange={_self.bindData} type="text" className="form-control" placeholder="Login Id" />
-                <input name="Password" value={_self.Password} onChange={_self.bindData} type="password" className="form-control" placeholder="Password" />
-                <div>
-                    <br />
-                    <button onClick={_self.LoginActionClick} className="btn btn-primary">Login</button>
-                    &nbsp;
-                    <button onClick={_self.RegistrationActionClick} className="btn btn-success">New Registration</button>
-                </div>           
-                <div name="ErrorMessage" className="alert alert-danger" hidden></div>
-                <div name="SuccessMessage" className="alert alert-success" hidden></div>
+                <div id={this.id}>
+                    <h3>User Login</h3>
+                    <input name="LoginId" value={this.LoginId} onChange={this.bindData} type="text" className="form-control" placeholder="Login Id" />
+                    <input name="Password" value={this.Password} onChange={this.bindData} type="password" className="form-control" placeholder="Password" />
+                    <div>
+                        <br />
+                        <button onClick={this.LoginActionClick} className="btn btn-primary">Login</button>
+                        &nbsp;
+                        <button onClick={this.RegistrationActionClick} className="btn btn-success">New Registration</button>
+                    </div>           
+                    <br/> &nbsp;
+                    <div name="ErrorMessage" className="alert alert-danger" hidden></div>
+                    <div name="SuccessMessage" className="alert alert-success" hidden></div>
+                </div>
             </React.Fragment>
             );
     }
 
     bindData = (e) => {
-        _self.LoginModel[e.target.name] = e.target.value;
-        _self.setState({ [e.target.name]: e.target.value });
+        this.LoginModel[e.target.name] = e.target.value;
+        this.setState({ [e.target.name]: e.target.value });
     }
 
     LoginActionClick = (e) => {
 
         localStorage.clear();
+        var self = this;
+        var parent = $("#" + this.id);
+        parent.find("[name='ErrorMessage']").hide();
+        parent.find("[name='SuccessMessage']").hide();
+
         var loginService = new LoginService();
 
-        loginService.IsValidLogin(_self.LoginModel, function (result) {
+        loginService.IsValidLogin(this.LoginModel, function (result) {
             if (result.IsSuccess) {
                 localStorage.setItem("LoginId", result.JsonObject.Data.LoginId);
                 localStorage.setItem("Token", result.JsonObject.Data.Token);
                 window.location.href = "../Dashboard/Index";
             }
             else {
-                alert(result.Message);
+                parent.find("[name='ErrorMessage']").show().html(result.Message);
             }
         });
     }

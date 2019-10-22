@@ -26,9 +26,8 @@ class RegistrationPanel extends React.Component {
                         <button onClick={this.BacktoLoginEventClick} className="btn btn-success">Back to Login</button>
                     </div>
                     <br /> &nbsp;
-                
-                     <div name="ErrorMessage" className="alert alert-danger" hidden ></div>
-                     <div name="SuccessMessage" className="alert alert-success" hidden></div>
+                    <div name="ErrorMessage" className="alert alert-danger" hidden ></div>
+                    <div name="SuccessMessage" className="alert alert-success" hidden></div>
                 </div>       
             </React.Fragment>
         );
@@ -56,16 +55,14 @@ class RegistrationPanel extends React.Component {
         loginService.InsertLogin(this.RegistrationModel, function (result) {
           
             if (result.IsSuccess) {
-                parent.find('[name="SuccessMessage"]').show();
-                parent.find('[name="SuccessMessage"]').html("You are now registered!");
+                parent.find('[name="SuccessMessage"]').show().html("You are now registered!")
                 parent.find('[name=btnRegister]').prop("disabled", true);
 
             }
             else {
                 self.SetControlValue("LoginId", "");
                 self.SetControlValue("Password", "");
-                parent.find('[name="ErrorMessage"]').show();
-                parent.find('[name="ErrorMessage"]').html(result.Message);
+                parent.find('[name="ErrorMessage"]').show().html(result.Message);
             }
         });
     }
