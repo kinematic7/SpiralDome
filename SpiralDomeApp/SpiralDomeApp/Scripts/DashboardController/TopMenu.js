@@ -1,4 +1,6 @@
 ﻿var topMenu = document.getElementById("TopMenu");
+var imgIcon = { width: '34px', height: '34px' };
+var ulTop = { margin: '0px' };
 
 class TopMenu extends React.Component {
 
@@ -6,14 +8,15 @@ class TopMenu extends React.Component {
         return (
             <React.Fragment>
                 <nav aria-label="Page navigation example">
-                    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSrzkWPAFu2gErSq1g6cQ34c6f8WoR5l_g9n4iUuK1LgX2Vxu68'></img>
-                    <ul className="pagination">
-                        <li className="page-item"><a id="menuAcct" className="page-link" href="#">➤ Account</a></li>
-                        <li className="page-item"><a className="page-link" href="#">➤ Finance</a></li>
-                        <li className="page-item"><a className="page-link" href="#">➤ Reminders</a></li>
-                        <li className="page-item"><a className="page-link" href="#">➤ Notes</a></li>
-                        <li className="page-item"><a className="page-link" href="#">➤ Documents</a></li>
-                        <li onClick={this.logoutAction}><a class="page-link" href="#">✖ Logout</a></li>
+                    <ul className="pagination justify-content-center" style={ulTop}>
+                        <li className="page-item"><a className="page-link" href='#'> <img style={imgIcon} src='../Content/images/logo.png'></img></a></li>
+                        <li className="page-item"><a className="page-link" href='#'> <input type='text' className='form-control' placeholder='Search by Name' /></a></li>
+                        <li className="page-item"><a id="menuAcct" className="page-link" href="#"> <img style={imgIcon} src='../Content/images/account.png'></img> Account</a></li>
+                        <li className="page-item"><a className="page-link" href="#"><img style={imgIcon} src='../Content/images/finance.png'></img> Finance</a></li>
+                        <li className="page-item"><a className="page-link" href="#"><img style={imgIcon} src='../Content/images/reminder.png'></img> Reminders</a></li>
+                        <li className="page-item"><a className="page-link" href="#"><img style={imgIcon} src='../Content/images/notes.png'></img>  Notes</a></li>
+                        <li className="page-item"><a className="page-link" href="#"><img style={imgIcon} src='../Content/images/document.png'></img> Documents</a></li>
+                        <li onClick={this.logoutAction}><a className="page-link" href="#"><img style={imgIcon} src='../Content/images/logout.png'></img> Logout</a></li>
                     </ul>
                 </nav>
             </React.Fragment>
@@ -28,4 +31,6 @@ class TopMenu extends React.Component {
 
 ReactDOM.render(<TopMenu />, topMenu);
 
-$("#menuAcct").css("color", "red");
+if (window.location.href.indexOf('Dashboard/Account') > 0) {
+    $("#menuAcct").css("color", "red");
+}

@@ -94,13 +94,20 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\images\account.png" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\images\document.png" />
+    <Content Include="Content\images\finance.png" />
+    <Content Include="Content\images\logo.png" />
+    <Content Include="Content\images\logout.png" />
+    <Content Include="Content\images\notes.png" />
+    <Content Include="Content\images\reminder.png" />
+    <Content Include="Content\images\secondlogo.png" />
     <Content Include="Content\jsgrid-theme.min.css" />
     <Content Include="Content\jsgrid.min.css" />
-    <Content Include="Content\pngtree-textured-blue-undulating-ripple-background-image_286112.jpg" />
     <Content Include="Content\Site.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -109,6 +116,7 @@
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
+    <Content Include="Scripts\DashboardController\Account.js" />
     <Content Include="Scripts\DashboardController\TopMenu.js" />
     <Content Include="Scripts\HomeController\Index.js" />
     <Content Include="Scripts\HomeController\Register.js" />
