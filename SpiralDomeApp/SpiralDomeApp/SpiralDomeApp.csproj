@@ -98,6 +98,9 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\jsgrid-theme.min.css" />
+    <Content Include="Content\jsgrid.min.css" />
+    <Content Include="Content\pngtree-textured-blue-undulating-ripple-background-image_286112.jpg" />
     <Content Include="Content\Site.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -113,7 +116,9 @@
     <Content Include="Scripts\jquery-3.3.1.min.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.js" />
+    <Content Include="Scripts\jsgrid.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\OnScreen Control.exe" />
     <Content Include="Scripts\react-dom.js" />
     <Content Include="Scripts\react.js" />
     <Content Include="Web.config" />
