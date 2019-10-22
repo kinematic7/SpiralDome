@@ -15,20 +15,20 @@ class RegistrationPanel extends React.Component {
         return (
             <React.Fragment>
                 <div id={this.id}>
-                <h3>User Registration</h3>
-                <input name="LoginId" type="text" value={this.RegistrationModel.LoginId} onChange={this.bind_RegistrationModel} className="form-control" placeholder="Login ID"  />
-                <input name="Password" type="password" value={this.RegistrationModel.Password} onChange={this.bind_RegistrationModel} className="form-control" placeholder="Password" />
-                <input name="ConfirmPassword" type="password" value={this.RegistrationModel.ConfirmPassword} onChange={this.bind_RegistrationModel} className="form-control" placeholder="Confirm Password" />
-                <div>
-                <br/>
-                    <button name="btnRegister" onClick={this.RegistrationEventClick} className="btn btn-primary">Register</button>
-                    &nbsp;
-                    <button onClick={this.BacktoLoginEventClick} className="btn btn-success">Back to Login</button>
-                </div>
-                <br /> &nbsp;
+                    <h3>User Registration</h3>
+                    <input name="LoginId" type="text" value={this.RegistrationModel.LoginId} onChange={this.bind_RegistrationModel} className="form-control" placeholder="Login ID"  />
+                    <input name="Password" type="password" value={this.RegistrationModel.Password} onChange={this.bind_RegistrationModel} className="form-control" placeholder="Password" />
+                    <input name="ConfirmPassword" type="password" value={this.RegistrationModel.ConfirmPassword} onChange={this.bind_RegistrationModel} className="form-control" placeholder="Confirm Password" />
+                    <div>
+                    <br/>
+                        <button name="btnRegister" onClick={this.RegistrationEventClick} className="btn btn-primary">Register</button>
+                        &nbsp;
+                        <button onClick={this.BacktoLoginEventClick} className="btn btn-success">Back to Login</button>
+                    </div>
+                    <br /> &nbsp;
                 
-                 <div name="ErrorMessage" className="alert alert-danger" hidden ></div>
-                 <div name="SuccessMessage" className="alert alert-success" hidden></div>
+                     <div name="ErrorMessage" className="alert alert-danger" hidden ></div>
+                     <div name="SuccessMessage" className="alert alert-success" hidden></div>
                 </div>       
             </React.Fragment>
         );
