@@ -8,27 +8,28 @@ class RegistrationPanel extends React.Component {
             {
                 LoginId: "", Password: "", ConfirmPassword : ""
             };
-        this.id = new Date().getTime();
+
+        this.refErrorMessage = React.createRef();
+        this.refSuccessMessage = React.createRef();
+        this.refbtnRegister = React.createRef();
     }
 
     render() {
         return (
             <React.Fragment>
-                <div id={this.id}>
-                    <h3>User Registration</h3>
-                    <input name="LoginId" type="text" value={this.RegistrationModel.LoginId} onChange={this.bind_RegistrationModel} className="form-control" placeholder="Login ID"  />
-                    <input name="Password" type="password" value={this.RegistrationModel.Password} onChange={this.bind_RegistrationModel} className="form-control" placeholder="Password" />
-                    <input name="ConfirmPassword" type="password" value={this.RegistrationModel.ConfirmPassword} onChange={this.bind_RegistrationModel} className="form-control" placeholder="Confirm Password" />
-                    <div>
-                    <br/>
-                        <button name="btnRegister" onClick={this.RegistrationEventClick} className="btn btn-primary">Register</button>
-                        &nbsp;
-                        <button onClick={this.BacktoLoginEventClick} className="btn btn-success">Back to Login</button>
-                    </div>
-                    <br /> &nbsp;
-                    <div name="ErrorMessage" className="alert alert-danger" hidden ></div>
-                    <div name="SuccessMessage" className="alert alert-success" hidden></div>
-                </div>       
+                <h3>User Registration</h3>
+                <input name="LoginId" type="text" value={this.RegistrationModel.LoginId} onChange={this.bind_RegistrationModel} className="form-control" placeholder="Login ID"  />
+                <input name="Password" type="password" value={this.RegistrationModel.Password} onChange={this.bind_RegistrationModel} className="form-control" placeholder="Password" />
+                <input name="ConfirmPassword" type="password" value={this.RegistrationModel.ConfirmPassword} onChange={this.bind_RegistrationModel} className="form-control" placeholder="Confirm Password" />
+                <div>
+                <br/>
+                    <button ref={this.refbtnRegister} name="btnRegister" onClick={this.RegistrationEventClick} className="btn btn-primary">Register</button>
+                    &nbsp;
+                    <button onClick={this.BacktoLoginEventClick} className="btn btn-success">Back to Login</button>
+                </div>
+                <br /> &nbsp;
+                <div ref={this.refErrorMessage} name="ErrorMessage" className="alert alert-danger" hidden ></div>
+                <div ref={this.refSuccessMessage} name="SuccessMessage" className="alert alert-success" hidden></div>    
             </React.Fragment>
         );
     }
@@ -47,22 +48,22 @@ class RegistrationPanel extends React.Component {
 
         var self = this;
         var parent = $("#" + self.id);
-        parent.find('[name="ErrorMessage"]').hide();
-        parent.find('[name="SuccessMessage"]').hide();
+        $(this.refErrorMessage.current).hide();
+        $(this.refSuccessMessage.current).hide();
 
         var loginService = new LoginService();
 
         loginService.InsertLogin(this.RegistrationModel, function (result) {
           
             if (result.IsSuccess) {
-                parent.find('[name="SuccessMessage"]').show().html("You are now registered!")
-                parent.find('[name=btnRegister]').prop("disabled", true);
-
+                $(self.refSuccessMessage.current).show().html("You are now registered!")
+                $(self.refbtnRegister.current).prop("disabled", true);
             }
             else {
                 self.SetControlValue("LoginId", "");
                 self.SetControlValue("Password", "");
-                parent.find('[name="ErrorMessage"]').show().html(result.Message);
+                self.SetControlValue("ConfirmPassword", "");
+                $(self.refErrorMessage.current).show().html(result.Message);
             }
         });
     }
