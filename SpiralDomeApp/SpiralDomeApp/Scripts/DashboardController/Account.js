@@ -33,9 +33,9 @@ class AccountPanel extends React.Component {
                     <input ref={this.ref_Comment} onChange={this.bind} name="Comment" type="text" className="form-control" placeholder="Comment" />
                     &nbsp;
                     &nbsp;
-                    <button onClick={this.updateAccountObject} className='btn btn-primary btn-xs' title='update'>Update</button>
+                    <button onClick={this.updateAccountObject} className='btn btn-primary btn-sm' title='update'>Update</button>
                     &nbsp;
-                    <button onClick={this.deleteAccountObject} className='btn btn-danger btn-xs' title='delete'>Delete</button>
+                    <button onClick={this.deleteAccountObject} className='btn btn-danger btn-sm' title='delete'>Delete</button>
                 </div>
             </React.Fragment>
             );
