@@ -5,6 +5,11 @@ var ulTop = { margin: '0px' };
 
 class TopMenu extends React.Component {
 
+    constructor(props) {
+        super(props);
+        this.refSearchByName = React.createRef();
+        
+    }
     render() {
         if (localStorage == null || localStorage.length == 0) {
             window.location.href = "../Home/Index";
@@ -15,8 +20,7 @@ class TopMenu extends React.Component {
                 <nav aria-label="Page navigation example">
                     <ul className="pagination justify-content-center" style={ulTop}>
                         <li className="page-item"><a className="page-link" href='#'> <img style={imgIcon} src='../Content/images/logo.png'></img></a></li>
-                        <li className="page-item"><a className="page-link" href='#'> <input type='text' className='form-control' placeholder='Search by Name' /></a> &nbsp;</li>
-                        <li className="page-item"><a className="page-link" href='#' title="Search"> <img style={imgIcon} src='../Content/images/search.svg'></img></a></li>
+                        <li className="page-item"><a className="page-link" href='#'> <input ref={this.refSearchByName} onChange={this.searchAction } type='text' className='form-control' placeholder='Search by Name' /></a> &nbsp;</li>
                         <li onClick={this.accountAction} className="page-item"><a id="menuAcct" className="page-link" href="#"> <img style={imgIcon} src='../Content/images/account.svg'></img> Account</a></li>
                         <li onClick={this.logoutAction}><a className="page-link" href="#"><img style={imgIcon} src='../Content/images/logout.svg'></img> Logout</a></li>
                     </ul>
@@ -29,13 +33,17 @@ class TopMenu extends React.Component {
         window.location.href = "../Dashboard/Account";
     }
 
+    searchAction = (e) => {
+        this.props.ParentControl.searchByName(this.refSearchByName.current.value);
+    }
+
     logoutAction = (e) => {
         localStorage.clear();
         window.location.href = "../Home/Index";
     }
 }
 
-ReactDOM.render(<TopMenu />, topMenu);
+//ReactDOM.render(<TopMenu />, topMenu);
 
 if (window.location.href.indexOf('Dashboard/Account') > 0) {
     $("#menuAcct").css("color", "black");

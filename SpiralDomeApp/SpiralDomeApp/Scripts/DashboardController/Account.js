@@ -19,6 +19,8 @@ class AccountPanel extends React.Component {
 
         return (
             <React.Fragment>
+                <TopMenu  ParentControl={this}/>
+                <br/>
                 <div className="form-inline">
                     <input ref={this.ref_Name} name="Name" onChange={this.bind} type="text" className="form-control" placeholder="Name" />
                     &nbsp;
@@ -42,6 +44,10 @@ class AccountPanel extends React.Component {
     bind = (e) => {
         this.AccountModel[e.target.name] = e.target.value.trim();
         this.setState({ [e.target.name]: e.target.value.trim() });
+    }
+
+    searchByName = (searchValue) => {
+        this.fillGrid(this, searchValue);
     }
 
     updateAccountObject = (e) => {
@@ -79,24 +85,23 @@ class AccountPanel extends React.Component {
     }
 
     setControlValue = (ctrl, model, value) => {
-        ctrl.current.value = value.trim();
-        model[ctrl.current.name] = value.trim();
+        if (value != null) {
+            ctrl.current.value = value.trim();
+            model[ctrl.current.name] = value.trim();
+        }
     }
 
-    fillGrid = (self) => {
+    fillGrid = (self, searchByNameFilter) => {
 
-        self.actSvc.GetAccountDatabyLoginId({ LoginId: localStorage.getItem("LoginId"), Token: localStorage.getItem("Token") },
+        self.actSvc.GetAccountDatabyLoginId({ LoginId: localStorage.getItem("LoginId"), Token: localStorage.getItem("Token"), SearchByName : searchByNameFilter },
             function (result) {
                 var clients = result.JsonObject.Data;
                 $("#jsGrid").jsGrid({
                     width: "100%",
                     height: "705px",
                     pageSize: 17,
-                    //inserting: true,
-                    //editing: true,
                     sorting: true,
                     paging: true,
-
                     autoload: true,
                     controller: {
                         loadData: function () {
@@ -115,7 +120,7 @@ class AccountPanel extends React.Component {
                         {
                             name: "Url",
                             itemTemplate: function (value) {
-                                return $("<a>").attr("href", value).text("Link");
+                                return $("<a>").attr("href", "#").attr("onclick", "window.open('" + value + "');").text("Link");
                             },
                             type: "text", width: 150, validate: "required"
                         },

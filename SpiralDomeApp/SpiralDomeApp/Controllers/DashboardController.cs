@@ -26,8 +26,9 @@ namespace SpiralDomeApp.Controllers
                 {
                     using (var context = new SpiralDomeDbContext())
                     {
+                        obj.SearchByName = obj.SearchByName == null ? "" : obj.SearchByName;
                         var res = (from account in context.Accounts
-                                   where account.LoginId == obj.LoginId
+                                   where account.LoginId == obj.LoginId && account.Name.Contains(obj.SearchByName)
                                    select account).OrderBy(x=>x.Name).ToList();
                         status.IsSuccess = true;
                         status.JsonObject = Json(res);

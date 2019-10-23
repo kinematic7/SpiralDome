@@ -29,5 +29,8 @@ namespace SpiralDomeApp.Models
 
         public DateTime? LastModified { get; set; }
 
+        [NotMapped]
+        public string SearchByName { get; set; }
+
     }
 }
