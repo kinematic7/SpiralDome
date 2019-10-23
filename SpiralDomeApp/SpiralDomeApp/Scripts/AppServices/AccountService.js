@@ -16,4 +16,13 @@
         });
 
     }
+
+    DeleteAccount = (accountObj, callback) => {
+        accountObj.LoginId = localStorage.getItem("LoginId");
+        accountObj.Token = localStorage.getItem("Token");
+        $.post("../Dashboard/DeleteAccount", accountObj, function (result) {
+            callback(result);
+        });
+
+    }
 }

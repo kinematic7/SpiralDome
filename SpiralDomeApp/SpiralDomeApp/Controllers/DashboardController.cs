@@ -132,12 +132,14 @@ namespace SpiralDomeApp.Controllers
                     using (var context = new SpiralDomeDbContext())
                     {
                         var res = (from account in context.Accounts
-                                   where account.Name.Trim() == obj.Name.Trim()
+                                   where account.Name.Trim() == obj.Name.Trim() && account.LoginId == obj.LoginId
                                    select account).SingleOrDefault();
                        
                         if (res != null)
                         {
                             context.Accounts.Remove(res);
+                            context.SaveChanges();
+                            status.IsSuccess = true;
                         }
                     }
                 }

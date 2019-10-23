@@ -33,15 +33,15 @@ class AccountPanel extends React.Component {
                     &nbsp;
                     <button onClick={this.updateAccountObject} className='btn btn-primary btn-xs' title='update'>Update</button>
                     &nbsp;
-                    <button className='btn btn-danger btn-xs' title='delete'>Delete</button>
+                    <button onClick={this.deleteAccountObject} className='btn btn-danger btn-xs' title='delete'>Delete</button>
                 </div>
             </React.Fragment>
             );
     }
 
     bind = (e) => {
-        this.AccountModel[e.target.name] = e.target.value;
-        this.setState({ [e.target.name]: e.target.value });
+        this.AccountModel[e.target.name] = e.target.value.trim();
+        this.setState({ [e.target.name]: e.target.value.trim() });
     }
 
     updateAccountObject = (e) => {
@@ -61,9 +61,26 @@ class AccountPanel extends React.Component {
         });
     }
 
+    deleteAccountObject = (e) => {
+        var self = this;
+        this.actSvc.DeleteAccount(this.AccountModel, function (result) {
+            self.setControlValue(self.ref_Name, self.AccountModel, "");
+            self.setControlValue(self.ref_Username, self.AccountModel, "");
+            self.setControlValue(self.ref_Password, self.AccountModel, "");
+            self.setControlValue(self.ref_Url, self.AccountModel, "");
+            self.setControlValue(self.ref_Comment, self.AccountModel, "");
+            if (result.IsSuccess) {
+                self.fillGrid(self);
+            }
+            else {
+                alert(result.Message);
+            }
+        });
+    }
+
     setControlValue = (ctrl, model, value) => {
-        ctrl.current.value = value;
-        model[ctrl.current.name] = value;
+        ctrl.current.value = value.trim();
+        model[ctrl.current.name] = value.trim();
     }
 
     fillGrid = (self) => {
