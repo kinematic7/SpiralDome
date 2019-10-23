@@ -1,4 +1,5 @@
-﻿using SpiralDomeApp.Models;
+﻿using SpiralDomeApp.Helper;
+using SpiralDomeApp.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,12 +16,13 @@ namespace SpiralDomeApp.Controllers
             return View();
         }
 
+        [HttpPost]
         public JsonResult GetAccountDatabyLoginId(Login obj)
         {
             CallStatus status = new CallStatus();
             try
             {
-                if (IsAuthenticToken(obj.LoginId, obj.Token))
+                if (GenericHelper.IsAuthenticToken(obj.LoginId, obj.Token))
                 {
                     using (var context = new SpiralDomeDbContext())
                     {
@@ -44,28 +46,112 @@ namespace SpiralDomeApp.Controllers
             return Json(status);
         }
 
-        public bool IsAuthenticToken(string loginid, string token)
+        [HttpPost]
+        public JsonResult InsertNewAccount(Account obj)
         {
-            var retVal = false;
-            using(var context = new SpiralDomeDbContext())
+            CallStatus status = new CallStatus();
+            try
             {
-                var res = (from login in context.Logins
-                           where login.LoginId == loginid && login.Token == token
-                           select login).SingleOrDefault();
-                
-                if(res == null)
+                if (GenericHelper.IsAuthenticToken(obj.LoginId, obj.Token))
                 {
-                    retVal = false;
+                    using (var context = new SpiralDomeDbContext())
+                    {
+                        context.Accounts.Add(obj);
+                        context.SaveChanges();
+                    }
+
+                    status.IsSuccess = true;
                 }
                 else
                 {
-                    retVal = true;
-                    res.LastModified = DateTime.UtcNow;
-                    context.SaveChanges();
+                    throw new Exception("Invalid Authentication Token");
                 }
             }
+            catch(Exception ex)
+            {
+                status.IsSuccess = false;
+                status.Message = ex.Message;
+            }
 
-            return retVal;
+            return Json(status);
+        }
+
+        [HttpPost]
+        public JsonResult UpdateAccount(Account obj)
+        {
+            CallStatus status = new CallStatus();
+            try
+            {
+                if (GenericHelper.IsAuthenticToken(obj.LoginId, obj.Token))
+                {
+                    using (var context = new SpiralDomeDbContext())
+                    {
+                        var res = (from account in context.Accounts
+                                   where account.Name.Trim() == obj.Name.Trim()
+                                   select account).SingleOrDefault();
+
+                        if(res != null)
+                        {
+                            res.Name = obj.Name;
+                            res.Username = obj.Username;
+                            res.Password = obj.Password;
+                            res.Url = obj.Url;
+                            res.Comment = obj.Comment;
+                            context.SaveChanges();
+                        }
+                        else
+                        {
+                            throw new Exception("This record does not exist.");
+                        }
+                    }
+
+                    status.IsSuccess = true;
+                }
+                else
+                {
+                    throw new Exception("Invalid Authentication Token");
+                }
+            }
+            catch (Exception ex)
+            {
+                status.IsSuccess = false;
+                status.Message = ex.Message;
+            }
+
+            return Json(status);
+        }
+
+        [HttpPost]
+        public JsonResult DeleteAccount(Account obj)
+        {
+            CallStatus status = new CallStatus();
+            try
+            {
+                if (GenericHelper.IsAuthenticToken(obj.LoginId, obj.Token))
+                {
+                    using (var context = new SpiralDomeDbContext())
+                    {
+                        var res = (from account in context.Accounts
+                                   where account.Name.Trim() == obj.Name.Trim()
+                                   select account).SingleOrDefault();
+                       
+                        if (res != null)
+                        {
+                            context.Accounts.Remove(res);
+                        }
+                    }
+                }
+                else
+                {
+                    throw new Exception("Invalid Authentication Token");
+                }
+            }
+            catch (Exception ex)
+            {
+                status.IsSuccess = false;
+                status.Message = ex.Message;
+            }
+            return Json(status);
         }
     }
 }

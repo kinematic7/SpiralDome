@@ -51,7 +51,7 @@ namespace SpiralDomeApp.Controllers
             catch (DbEntityValidationException e)
             {
                 result.IsSuccess = false;
-                result.Message = Helper.ErrorMessage.GetValidationMessage(e);
+                result.Message = Helper.GenericHelper.GetValidationMessage(e);
             }
             catch (Exception ex)
             {
@@ -101,7 +101,7 @@ namespace SpiralDomeApp.Controllers
             catch (DbEntityValidationException e)
             {
                 result.IsSuccess = false;
-                result.Message = Helper.ErrorMessage.GetValidationMessage(e);
+                result.Message = Helper.GenericHelper.GetValidationMessage(e);
             }
             catch (Exception ex)
             {

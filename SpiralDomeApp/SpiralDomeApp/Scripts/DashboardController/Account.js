@@ -1,37 +1,37 @@
 ﻿var AccountContainer = document.getElementById("AccountPanel");
-//var self = null;
 
 class AccountPanel extends React.Component {
 
     constructor(props) {
         super(props);
-        self = this;
         this.ref_Name = React.createRef();
         this.ref_Url = React.createRef();
         this.ref_Username = React.createRef();
         this.ref_Password = React.createRef();
         this.ref_Comment = React.createRef();
+        this.AccountModel = { Name: "", Url: "", Username: "", Password: "", Comment: "" }
+        this.actSvc = new AccountService();
     }
 
     render() {
 
-        this.fillGrid(self);
+        this.fillGrid(this);
 
         return (
             <React.Fragment>
                 <div className="form-inline">
-                    <input ref={this.ref_Name} name="Name" type="text" className="form-control" placeholder="Name" />
+                    <input ref={this.ref_Name} name="Name" onChange={this.bind} type="text" className="form-control" placeholder="Name" />
                     &nbsp;
-                    <input ref={this.ref_Url} type="text" className="form-control" placeholder="Url" />
+                    <input ref={this.ref_Url} name="Url" onChange={this.bind} type="text" className="form-control" placeholder="Url" />
                     &nbsp;
-                    <input ref={this.ref_Username} type="text" className="form-control" placeholder="Username" />
+                    <input ref={this.ref_Username} onChange={this.bind} name="Username" type="text" className="form-control" placeholder="Username" />
                     &nbsp;
-                    <input ref={this.ref_Password} type="text" className="form-control" placeholder="Password" />
+                    <input ref={this.ref_Password} onChange={this.bind} name = "Password" type="text" className="form-control" placeholder="Password" />
                     &nbsp;
-                    <input ref={this.ref_Comment} type="text" className="form-control" placeholder="Comment" />
+                    <input ref={this.ref_Comment} onChange={this.bind} name="Comment" type="text" className="form-control" placeholder="Comment" />
                     &nbsp;
                     &nbsp;
-                    <button className='btn btn-success'>🞦</button>
+                    <button onClick={this.insertAccountObject} className='btn btn-success'>🞦</button>
                     &nbsp;
                     <button className='btn btn-primary'>✏</button>
                     &nbsp;
@@ -41,11 +41,36 @@ class AccountPanel extends React.Component {
             );
     }
 
+    bind = (e) => {
+        this.AccountModel[e.target.name] = e.target.value;
+        this.setState({ [e.target.name]: e.target.value });
+    }
+
+    insertAccountObject = (e) => {
+        var self = this;
+        this.actSvc.InsertNewAccount(this.AccountModel, function (result) {
+            self.setControlValue(self.ref_Name, self.AccountModel, "");
+            self.setControlValue(self.ref_Username, self.AccountModel, "");
+            self.setControlValue(self.ref_Password, self.AccountModel, "");
+            self.setControlValue(self.ref_Url, self.AccountModel, "");
+            self.setControlValue(self.ref_Comment, self.AccountModel, "");
+            if (result.IsSuccess) {
+                self.fillGrid(self);
+            }
+            else {
+                alert(result.Message);
+            }
+        });
+    }
+
+    setControlValue = (ctrl, model, value) => {
+        ctrl.current.value = value;
+        model[ctrl.current.name] = value;
+    }
+
     fillGrid = (self) => {
 
-        var actSvc = new AccountService();
-
-        actSvc.GetAccountDatabyLoginId({ LoginId: localStorage.getItem("LoginId"), Token: localStorage.getItem("Token") },
+        self.actSvc.GetAccountDatabyLoginId({ LoginId: localStorage.getItem("LoginId"), Token: localStorage.getItem("Token") },
             function (result) {
                 var clients = result.JsonObject.Data;
                 $("#jsGrid").jsGrid({
