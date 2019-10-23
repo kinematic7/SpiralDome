@@ -11,12 +11,13 @@ namespace SpiralDomeApp.Models
     public class Account
     {
         public int Id { get; set; }
-        [Index(IsUnique = true), StringLength(300)]
+        [Required]
         public string Name { get; set; }
         public string Url { get; set;  }
         public string Username { get; set; }
         public string Password { get; set; }
         public string Comment { get; set; }
+        [Required]
         public string LoginId { get; set; }
         [NotMapped]
         public string Token { get; set; }

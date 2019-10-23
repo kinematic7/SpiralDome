@@ -6,6 +6,9 @@ var ulTop = { margin: '0px' };
 class TopMenu extends React.Component {
 
     render() {
+        if (localStorage == null || localStorage.length == 0) {
+            window.location.href = "../Home/Index";
+        }
         return (
             <React.Fragment>
                 
@@ -13,7 +16,7 @@ class TopMenu extends React.Component {
                     <ul className="pagination justify-content-center" style={ulTop}>
                         <li className="page-item"><a className="page-link" href='#'> <img style={imgIcon} src='../Content/images/logo.png'></img></a></li>
                         <li className="page-item"><a className="page-link" href='#'> <input type='text' className='form-control' placeholder='Search by Name' /></a> &nbsp;</li>
-                        <li className="page-item"><a className="page-link" href='#'> <button className='btn btn-primary'>Search</button></a></li>
+                        <li className="page-item"><a className="page-link" href='#' title="Search"> <img style={imgIcon} src='../Content/images/search.svg'></img></a></li>
                         <li onClick={this.accountAction} className="page-item"><a id="menuAcct" className="page-link" href="#"> <img style={imgIcon} src='../Content/images/account.svg'></img> Account</a></li>
                         <li onClick={this.logoutAction}><a className="page-link" href="#"><img style={imgIcon} src='../Content/images/logout.svg'></img> Logout</a></li>
                     </ul>

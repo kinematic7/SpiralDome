@@ -102,6 +102,7 @@
     <Content Include="Content\images\account.svg" />
     <Content Include="Content\images\logo.png" />
     <Content Include="Content\images\logout.svg" />
+    <Content Include="Content\images\search.svg" />
     <Content Include="Content\images\secondlogo.png" />
     <Content Include="Content\jsgrid-theme.min.css" />
     <Content Include="Content\jsgrid.min.css" />
@@ -166,6 +167,14 @@
     <Compile Include="Migrations\201910222202223_Account.Designer.cs">
       <DependentUpon>201910222202223_Account.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201910231548081_Account1.cs" />
+    <Compile Include="Migrations\201910231548081_Account1.Designer.cs">
+      <DependentUpon>201910231548081_Account1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201910231549447_Account2.cs" />
+    <Compile Include="Migrations\201910231549447_Account2.Designer.cs">
+      <DependentUpon>201910231549447_Account2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Account.cs" />
     <Compile Include="Models\CallStatus.cs" />
@@ -221,6 +230,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201910222202223_Account.resx">
       <DependentUpon>201910222202223_Account.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201910231548081_Account1.resx">
+      <DependentUpon>201910231548081_Account1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201910231549447_Account2.resx">
+      <DependentUpon>201910231549447_Account2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -8,10 +8,10 @@
 
     }
 
-    InsertNewAccount = (accountObj, callback) => {
+    UpdateAccount = (accountObj, callback) => {
         accountObj.LoginId = localStorage.getItem("LoginId");
         accountObj.Token = localStorage.getItem("Token");
-        $.post("../Dashboard/InsertNewAccount", accountObj, function (result) {
+        $.post("../Dashboard/UpdateAccount", accountObj, function (result) {
             callback(result);
         });
 

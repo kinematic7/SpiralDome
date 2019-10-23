@@ -31,11 +31,9 @@ class AccountPanel extends React.Component {
                     <input ref={this.ref_Comment} onChange={this.bind} name="Comment" type="text" className="form-control" placeholder="Comment" />
                     &nbsp;
                     &nbsp;
-                    <button onClick={this.insertAccountObject} className='btn btn-success'>🞦</button>
+                    <button onClick={this.updateAccountObject} className='btn btn-primary btn-xs' title='update'>Update</button>
                     &nbsp;
-                    <button className='btn btn-primary'>✏</button>
-                    &nbsp;
-                    <button className='btn btn-danger'>🗙</button>
+                    <button className='btn btn-danger btn-xs' title='delete'>Delete</button>
                 </div>
             </React.Fragment>
             );
@@ -46,9 +44,9 @@ class AccountPanel extends React.Component {
         this.setState({ [e.target.name]: e.target.value });
     }
 
-    insertAccountObject = (e) => {
+    updateAccountObject = (e) => {
         var self = this;
-        this.actSvc.InsertNewAccount(this.AccountModel, function (result) {
+        this.actSvc.UpdateAccount(this.AccountModel, function (result) {
             self.setControlValue(self.ref_Name, self.AccountModel, "");
             self.setControlValue(self.ref_Username, self.AccountModel, "");
             self.setControlValue(self.ref_Password, self.AccountModel, "");
@@ -89,11 +87,11 @@ class AccountPanel extends React.Component {
                         }
                     },
                     rowClick: function (args) {
-                        $(self.ref_Name.current).val(args.item.Name);
-                        $(self.ref_Url.current).val(args.item.Url);
-                        $(self.ref_Username.current).val(args.item.Username);
-                        $(self.ref_Password.current).val(args.item.Password);
-                        $(self.ref_Comment.current).val(args.item.Comment);
+                        self.setControlValue(self.ref_Name, self.AccountModel, args.item.Name);
+                        self.setControlValue(self.ref_Username, self.AccountModel, args.item.Username);
+                        self.setControlValue(self.ref_Password, self.AccountModel, args.item.Password);
+                        self.setControlValue(self.ref_Url, self.AccountModel, args.item.Url);
+                        self.setControlValue(self.ref_Comment, self.AccountModel, args.item.Comment);
                     },
                     fields: [
                         { name: "Name", width: 150, filtering: true },
