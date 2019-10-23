@@ -14,6 +14,7 @@ class LoginPanel extends React.Component {
     }
 
     render() {
+        localStorage.clear();
         return (
             <React.Fragment>
                 <h3>User Login</h3>

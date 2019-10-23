@@ -14,5 +14,6 @@ namespace SpiralDomeApp.Models
 
         }
         public DbSet<Login> Logins { get; set; }
+        public DbSet<Account> Accounts { get; set; }
     }
 }

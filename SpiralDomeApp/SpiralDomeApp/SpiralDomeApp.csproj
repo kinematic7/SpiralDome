@@ -50,6 +50,7 @@
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Activities" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -111,6 +112,7 @@
     <Content Include="Content\Site.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
+    <Content Include="Scripts\AppServices\AccountService.js" />
     <Content Include="Scripts\AppServices\LoginService.js" />
     <Content Include="Scripts\babel.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -164,7 +166,12 @@
     <Compile Include="Migrations\201910202224186_Login5.Designer.cs">
       <DependentUpon>201910202224186_Login5.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201910222202223_Account.cs" />
+    <Compile Include="Migrations\201910222202223_Account.Designer.cs">
+      <DependentUpon>201910222202223_Account.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\Account.cs" />
     <Compile Include="Models\CallStatus.cs" />
     <Compile Include="Models\Login.cs" />
     <Compile Include="Models\SprialDomeDbContext.cs" />
@@ -215,6 +222,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201910202224186_Login5.resx">
       <DependentUpon>201910202224186_Login5.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201910222202223_Account.resx">
+      <DependentUpon>201910222202223_Account.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

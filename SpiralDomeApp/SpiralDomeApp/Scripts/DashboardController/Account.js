@@ -1,22 +1,34 @@
 ﻿var AccountContainer = document.getElementById("AccountPanel");
+//var self = null;
 
 class AccountPanel extends React.Component {
 
+    constructor(props) {
+        super(props);
+        self = this;
+        this.ref_Name = React.createRef();
+        this.ref_Url = React.createRef();
+        this.ref_Username = React.createRef();
+        this.ref_Password = React.createRef();
+        this.ref_Comment = React.createRef();
+    }
+
     render() {
-        this.fillGrid();
+
+        this.fillGrid(self);
 
         return (
             <React.Fragment>
                 <div className="form-inline">
-                    <input type="text" className="form-control" placeholder="Name" />
+                    <input ref={this.ref_Name} name="Name" type="text" className="form-control" placeholder="Name" />
                     &nbsp;
-                    <input type="text" className="form-control" placeholder="Url" />
+                    <input ref={this.ref_Url} type="text" className="form-control" placeholder="Url" />
                     &nbsp;
-                    <input type="text" className="form-control" placeholder="LoginId" />
+                    <input ref={this.ref_Username} type="text" className="form-control" placeholder="Username" />
                     &nbsp;
-                    <input type="text" className="form-control" placeholder="Password" />
+                    <input ref={this.ref_Password} type="text" className="form-control" placeholder="Password" />
                     &nbsp;
-                    <input type="text" className="form-control" placeholder="Comment" />
+                    <input ref={this.ref_Comment} type="text" className="form-control" placeholder="Comment" />
                     &nbsp;
                     &nbsp;
                     <button className='btn btn-success'>🞦</button>
@@ -29,45 +41,57 @@ class AccountPanel extends React.Component {
             );
     }
 
-    fillGrid = (e) => {
-        var clients = [
-            { "Name": "Otto Clay", "Age": 25, "Country": 1, "Address": "Ap #897-1459 Quam Avenue", "Married": false },
-            { "Name": "Connor Johnston", "Age": 45, "Country": 2, "Address": "Ap #370-4647 Dis Av.", "Married": true },
-            { "Name": "Lacey Hess", "Age": 29, "Country": 3, "Address": "Ap #365-8835 Integer St.", "Married": false },
-            { "Name": "Timothy Henson", "Age": 56, "Country": 1, "Address": "911-5143 Luctus Ave", "Married": true },
-            { "Name": "Ramona Benton", "Age": 32, "Country": 3, "Address": "Ap #614-689 Vehicula Street", "Married": false }
-        ];
+    fillGrid = (self) => {
 
-        $("#jsGrid").jsGrid({
-            width: "100%",
-            height: "600px",
+        var actSvc = new AccountService();
 
-            //inserting: true,
-            //editing: true,
-            sorting: true,
-            paging: true,
+        actSvc.GetAccountDatabyLoginId({ LoginId: localStorage.getItem("LoginId"), Token: localStorage.getItem("Token") },
+            function (result) {
+                var clients = result.JsonObject.Data;
+                $("#jsGrid").jsGrid({
+                    width: "100%",
+                    height: "705px",
+                    pageSize: 17,
+                    //inserting: true,
+                    //editing: true,
+                    sorting: true,
+                    paging: true,
 
-            autoload: true,
-            controller: {
-                loadData: function () {
-                    return clients;
-                }
-            },
-
-            fields: [
-                {
-                    name: "Name",
-                    itemTemplate: function (value) {
-                        return $("<a>").attr("href", value).text(value);
-                    }, width: 150, filtering: true
-                },
-                { name: "Url", type: "text", width: 150, validate: "required" },
-                { name: "LoginId", type: "text", width: 150, validate: "required" },
-                { name: "Password", type: "text", width: 150, validate: "required" },
-                { name: "Comment", type: "text", width: 150, validate: "required" },
-                //{ type: "control" }
-            ]
-        });
+                    autoload: true,
+                    controller: {
+                        loadData: function () {
+                            return clients;
+                        }
+                    },
+                    rowClick: function (args) {
+                        $(self.ref_Name.current).val(args.item.Name);
+                        $(self.ref_Url.current).val(args.item.Url);
+                        $(self.ref_Username.current).val(args.item.Username);
+                        $(self.ref_Password.current).val(args.item.Password);
+                        $(self.ref_Comment.current).val(args.item.Comment);
+                    },
+                    fields: [
+                        { name: "Name", width: 150, filtering: true },
+                        {
+                            name: "Url",
+                            itemTemplate: function (value) {
+                                return $("<a>").attr("href", value).text("Link");
+                            },
+                            type: "text", width: 150, validate: "required"
+                        },
+                        { name: "Username", type: "text", width: 150, validate: "required" },
+                        {
+                            name: "Password",
+                            itemTemplate: function (value) {
+                                return "🔒 * * * *";
+                            },
+                            type: "text", width: 150, validate: "required"
+                        },
+                        { name: "Comment", type: "text", width: 150, validate: "required" },
+                        //{ type: "control" }
+                    ]
+                });
+            });
     }
 }
 
