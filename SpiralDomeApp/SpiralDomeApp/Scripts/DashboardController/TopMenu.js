@@ -21,7 +21,7 @@ class TopMenu extends React.Component {
                     <ul className="pagination justify-content-center" style={ulTop}>
                         <li className="page-item"><a className="page-link" href='#'> <img style={imgIcon} src='../Content/images/logo.png'></img></a></li>
                         <li className="page-item"><a className="page-link" href='#'> <input ref={this.refSearchByName} onChange={this.searchAction } type='text' className='form-control' placeholder='Search by Name' /></a> &nbsp;</li>
-                        <li onClick={this.accountAction} className="page-item"><a id="menuAcct" className="page-link" href="#"> <img style={imgIcon} src='../Content/images/account.svg'></img> Account</a></li>
+                        <li onClick={this.accountAction} className="page-item"><a id="menuAcct" className="page-link" href="#"> <img style={imgIcon} src='../Content/images/account.svg'></img> Accounts</a></li>
                         <li onClick={this.logoutAction}><a className="page-link" href="#"><img style={imgIcon} src='../Content/images/logout.svg'></img> Logout</a></li>
                     </ul>
                 </nav>
@@ -42,6 +42,12 @@ class TopMenu extends React.Component {
         window.location.href = "../Home/Index";
     }
 }
+
+    //<li onClick={this.logoutAction}><a className="page-link" href="#"><img style={imgIcon} src='../Content/images/reminders.svg'></img> Reminders</a></li>
+    //<li onClick={this.logoutAction}><a className="page-link" href="#"><img style={imgIcon} src='../Content/images/creditcard.svg'></img> Payments</a></li>
+    //<li onClick={this.logoutAction}><a className="page-link" href="#"><img style={imgIcon} src='../Content/images/documents.svg'></img> Documents</a></li>
+    //<li onClick={this.logoutAction}><a className="page-link" href="#"><img style={imgIcon} src='../Content/images/notes.svg'></img> Notes</a></li>
+    //<li onClick={this.logoutAction}><a className="page-link" href="#"><img style={imgIcon} src='../Content/images/settings.svg'></img> Settings</a></li>
 
 //ReactDOM.render(<TopMenu />, topMenu);
 

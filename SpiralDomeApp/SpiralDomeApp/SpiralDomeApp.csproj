@@ -100,10 +100,17 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\images\account.svg" />
+    <Content Include="Content\images\creditcard.svg" />
+    <Content Include="Content\images\documents.svg" />
+    <Content Include="Content\images\email.svg" />
+    <Content Include="Content\images\expenses.svg" />
     <Content Include="Content\images\logo.png" />
     <Content Include="Content\images\logout.svg" />
+    <Content Include="Content\images\notes.svg" />
+    <Content Include="Content\images\reminders.svg" />
     <Content Include="Content\images\search.svg" />
     <Content Include="Content\images\secondlogo.png" />
+    <Content Include="Content\images\settings.svg" />
     <Content Include="Content\jsgrid-theme.min.css" />
     <Content Include="Content\jsgrid.min.css" />
     <Content Include="Content\Site.css" />
