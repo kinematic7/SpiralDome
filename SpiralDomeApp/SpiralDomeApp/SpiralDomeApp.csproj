@@ -185,10 +185,27 @@
     <Compile Include="Migrations\201910231549447_Account2.Designer.cs">
       <DependentUpon>201910231549447_Account2.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201910251632343_Reminder.cs" />
+    <Compile Include="Migrations\201910251632343_Reminder.Designer.cs">
+      <DependentUpon>201910251632343_Reminder.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201910251815087_Reminder1.cs" />
+    <Compile Include="Migrations\201910251815087_Reminder1.Designer.cs">
+      <DependentUpon>201910251815087_Reminder1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201910251828444_Reminder2.cs" />
+    <Compile Include="Migrations\201910251828444_Reminder2.Designer.cs">
+      <DependentUpon>201910251828444_Reminder2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201910251829548_Reminder3.cs" />
+    <Compile Include="Migrations\201910251829548_Reminder3.Designer.cs">
+      <DependentUpon>201910251829548_Reminder3.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Account.cs" />
     <Compile Include="Models\CallStatus.cs" />
     <Compile Include="Models\Login.cs" />
+    <Compile Include="Models\Reminder.cs" />
     <Compile Include="Models\SprialDomeDbContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -247,6 +264,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201910231549447_Account2.resx">
       <DependentUpon>201910231549447_Account2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201910251632343_Reminder.resx">
+      <DependentUpon>201910251632343_Reminder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201910251815087_Reminder1.resx">
+      <DependentUpon>201910251815087_Reminder1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201910251828444_Reminder2.resx">
+      <DependentUpon>201910251828444_Reminder2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201910251829548_Reminder3.resx">
+      <DependentUpon>201910251829548_Reminder3.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

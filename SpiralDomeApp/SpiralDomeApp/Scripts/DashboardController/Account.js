@@ -14,11 +14,13 @@ class AccountPanel extends React.Component {
     }
 
     render() {
-
-        if (window.location.href.indexOf('Dashboard/Account') > 0) {
-            $("#menuAcct").css("color", "black");
-        }
-        this.fillGrid(this);
+        var self = this;
+        $(document).ready(function () {
+            if (window.location.href.indexOf('Dashboard/Account') > 0) {
+                $("#menuAcct").css("color", "black");
+            }
+            self.fillGrid(self);
+        });
 
         return (
             <React.Fragment>
@@ -36,7 +38,7 @@ class AccountPanel extends React.Component {
                     <input ref={this.ref_Comment} onChange={this.bind} name="Comment" type="text" className="form-control" placeholder="Comment" />
                     &nbsp;
                     &nbsp;
-                    <button onClick={this.updateAccountObject} className='btn btn-primary btn-sm' title='update'>Update</button>
+                    <button onClick={this.updateAccountObject} className='btn btn-primary btn-sm' title='add or update'>Update</button>
                     &nbsp;
                     <button onClick={this.deleteAccountObject} className='btn btn-danger btn-sm' title='delete'>Delete</button>
                 </div>

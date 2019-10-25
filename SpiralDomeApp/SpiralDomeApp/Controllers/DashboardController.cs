@@ -161,5 +161,115 @@ namespace SpiralDomeApp.Controllers
         {
             return View();
         }
+
+        [HttpPost]
+        public JsonResult InsertNewReminder(Reminder obj)
+        {
+            CallStatus status = new CallStatus();
+
+            try
+            {
+                if (GenericHelper.IsAuthenticToken(obj.LoginId, obj.Token))
+                {
+                    using (var context = new SpiralDomeDbContext())
+                    {
+                        context.Reminders.Add(obj);
+                        context.SaveChanges();
+                        status.IsSuccess = true;
+                    }
+                }
+                else
+                {
+                    throw new Exception("Invalid Authentication Token");
+                }
+            }catch(Exception ex)
+            {
+                status.Message = ex.Message;
+                status.IsSuccess = false;
+            }
+
+            return Json(status);
+        }
+
+        [HttpPost]
+        public JsonResult UpdateReminder(Reminder obj)
+        {
+            CallStatus status = new CallStatus();
+            try
+            {
+                if (GenericHelper.IsAuthenticToken(obj.LoginId, obj.Token))
+                {
+                    using (var context = new SpiralDomeDbContext())
+                    {
+                        var res = (from reminder in context.Reminders
+                                   where reminder.Name.Trim() == obj.Name.Trim() && reminder.LoginId == obj.LoginId
+                                   select reminder).SingleOrDefault();
+
+                        if (res != null)
+                        {
+                            res.Name = obj.Name;
+                            res.StartDate = obj.StartDate;
+                            res.EndDate = obj.EndDate;
+                            res.Group = obj.Group;
+                            res.Comment = obj.Comment;
+                            context.SaveChanges();
+                        }
+                        else
+                        {
+                            return InsertNewReminder(obj);
+                        }
+                    }
+
+                    status.IsSuccess = true;
+                }
+                else
+                {
+                    throw new Exception("Invalid Authentication Token");
+                }
+            }
+            catch (Exception ex)
+            {
+                status.IsSuccess = false;
+                status.Message = ex.Message;
+            }
+
+            return Json(status);
+        }
+
+        [HttpPost]
+        public JsonResult DeleteReminder(Reminder obj)
+        {
+            CallStatus status = new CallStatus();
+            try
+            {
+                if (GenericHelper.IsAuthenticToken(obj.LoginId, obj.Token))
+                {
+                    using (var context = new SpiralDomeDbContext())
+                    {
+                        var res = (from reminder in context.Reminders
+                                   where reminder.Name.Trim() == obj.Name.Trim() && reminder.LoginId == obj.LoginId
+                                   select reminder).SingleOrDefault();
+
+                        if (res != null)
+                        {
+                            context.Reminders.Remove(res);
+                            context.SaveChanges();
+                            status.IsSuccess = true;
+                        }
+                    }
+                }
+                else
+                {
+                    throw new Exception("Invalid Authentication Token");
+                }
+            }
+            catch (Exception ex)
+            {
+                status.IsSuccess = false;
+                status.Message = ex.Message;
+            }
+            return Json(status);
+        }
+
     }
 }

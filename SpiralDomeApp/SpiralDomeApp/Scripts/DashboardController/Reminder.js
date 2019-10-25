@@ -15,7 +15,12 @@ class ReminderPanel extends React.Component {
 
         $(document).ready(function () {
             self.setDatePicker();
+            if (window.location.href.indexOf('Dashboard/Reminder') > 0) {
+                $("#menuReminder").css("color", "black");
+            }
         });
+
+       
 
         return (
             <React.Fragment>
@@ -26,15 +31,15 @@ class ReminderPanel extends React.Component {
                     &nbsp;
                     <input type="text" ref={this.ref_startdate} className="form-control" placeholder="Start Date" />
                     &nbsp;
-                    <input type="text" ref={this.ref_enddate} className="form-control" placeholder="Start Date" />
+                    <input type="text" ref={this.ref_enddate} className="form-control" placeholder="End Date" />
                     &nbsp;
                     <input type="text" className="form-control" placeholder="Group" />
                     &nbsp;
                     <input type="text" className="form-control" placeholder="Comment" />
                     &nbsp;
-                    <button className='btn btn-sm btn-primary'>Update</button>
+                    <button className='btn btn-sm btn-primary' title='add or update'>Update</button>
                     &nbsp;
-                    <button className='btn btn-sm btn-danger'>Delete</button>
+                    <button className='btn btn-sm btn-danger' title='delete'>Delete</button>
                 </div>
             </React.Fragment>
         );
