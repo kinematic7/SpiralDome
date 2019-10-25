@@ -15,13 +15,13 @@ class TopMenu extends React.Component {
             window.location.href = "../Home/Index";
         }
         return (
-            <React.Fragment>
-                
+            <React.Fragment>                
                 <nav aria-label="Page navigation example">
                     <ul className="pagination justify-content-center" style={ulTop}>
                         <li className="page-item"><a className="page-link" href='#'> <img style={imgIcon} src='../Content/images/logo.png'></img></a></li>
                         <li className="page-item"><a className="page-link" href='#'> <input ref={this.refSearchByName} onChange={this.searchAction } type='text' className='form-control' placeholder='Search by Name' /></a> &nbsp;</li>
                         <li onClick={this.accountAction} className="page-item"><a id="menuAcct" className="page-link" href="#"> <img style={imgIcon} src='../Content/images/account.svg'></img> Accounts</a></li>
+                        <li onClick={this.reminderAction}><a className="page-link" href="#"><img style={imgIcon} src='../Content/images/reminders.svg'></img> Reminders</a></li>
                         <li onClick={this.logoutAction}><a className="page-link" href="#"><img style={imgIcon} src='../Content/images/logout.svg'></img> Logout</a></li>
                     </ul>
                 </nav>
@@ -33,13 +33,17 @@ class TopMenu extends React.Component {
         window.location.href = "../Dashboard/Account";
     }
 
-    searchAction = (e) => {
-        this.props.ParentControl.searchByName(this.refSearchByName.current.value);
+    reminderAction = (e) => {
+        window.location.href = "../Dashboard/Reminder";
     }
 
     logoutAction = (e) => {
         localStorage.clear();
         window.location.href = "../Home/Index";
+    }
+
+    searchAction = (e) => {
+        this.props.ParentControl.searchByName(this.refSearchByName.current.value);
     }
 }
 
@@ -51,6 +55,3 @@ class TopMenu extends React.Component {
 
 //ReactDOM.render(<TopMenu />, topMenu);
 
-if (window.location.href.indexOf('Dashboard/Account') > 0) {
-    $("#menuAcct").css("color", "black");
-}

@@ -111,6 +111,7 @@
     <Content Include="Content\images\search.svg" />
     <Content Include="Content\images\secondlogo.png" />
     <Content Include="Content\images\settings.svg" />
+    <Content Include="Content\jquery-ui.css" />
     <Content Include="Content\jsgrid-theme.min.css" />
     <Content Include="Content\jsgrid.min.css" />
     <Content Include="Content\Site.css" />
@@ -123,6 +124,7 @@
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\DashboardController\Account.js" />
+    <Content Include="Scripts\DashboardController\Reminder.js" />
     <Content Include="Scripts\DashboardController\TopMenu.js" />
     <Content Include="Scripts\HomeController\Index.js" />
     <Content Include="Scripts\HomeController\Register.js" />
@@ -130,6 +132,7 @@
     <Content Include="Scripts\jquery-3.3.1.min.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.js" />
+    <Content Include="Scripts\jquery-ui.js" />
     <Content Include="Scripts\jsgrid.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\OnScreen Control.exe" />
@@ -206,6 +209,7 @@
     <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.3.1.min.map" />
     <Content Include="Views\Dashboard\Account.cshtml" />
+    <Content Include="Views\Dashboard\Reminder.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

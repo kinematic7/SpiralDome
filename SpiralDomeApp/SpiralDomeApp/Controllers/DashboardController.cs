@@ -156,5 +156,10 @@ namespace SpiralDomeApp.Controllers
             }
             return Json(status);
         }
+
+        public ActionResult Reminder()
+        {
+            return View();
+        }
     }
 }

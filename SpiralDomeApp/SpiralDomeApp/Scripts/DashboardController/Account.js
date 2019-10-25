@@ -15,12 +15,15 @@ class AccountPanel extends React.Component {
 
     render() {
 
+        if (window.location.href.indexOf('Dashboard/Account') > 0) {
+            $("#menuAcct").css("color", "black");
+        }
         this.fillGrid(this);
 
         return (
             <React.Fragment>
-                <TopMenu  ParentControl={this}/>
-                <br/>
+                <TopMenu ParentControl={this} />
+                <br />
                 <div className="form-inline">
                     <input ref={this.ref_Name} name="Name" onChange={this.bind} type="text" className="form-control" placeholder="Name" />
                     &nbsp;
@@ -28,7 +31,7 @@ class AccountPanel extends React.Component {
                     &nbsp;
                     <input ref={this.ref_Username} onChange={this.bind} name="Username" type="text" className="form-control" placeholder="Username" />
                     &nbsp;
-                    <input ref={this.ref_Password} onChange={this.bind} name = "Password" type="text" className="form-control" placeholder="Password" />
+                    <input ref={this.ref_Password} onChange={this.bind} name="Password" type="text" className="form-control" placeholder="Password" />
                     &nbsp;
                     <input ref={this.ref_Comment} onChange={this.bind} name="Comment" type="text" className="form-control" placeholder="Comment" />
                     &nbsp;
@@ -38,7 +41,7 @@ class AccountPanel extends React.Component {
                     <button onClick={this.deleteAccountObject} className='btn btn-danger btn-sm' title='delete'>Delete</button>
                 </div>
             </React.Fragment>
-            );
+        );
     }
 
     bind = (e) => {
