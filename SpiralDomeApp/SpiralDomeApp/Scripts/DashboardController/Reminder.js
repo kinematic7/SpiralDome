@@ -27,17 +27,17 @@ class ReminderPanel extends React.Component {
                 <TopMenu ParentControl={this} />
                 <br/>
                 <div className="form-inline">
-                    <input type="text" className="form-control" placeholder="Name" />
+                    <input name="Name" onChange={this.bind} type="text" className="form-control" placeholder="Name" />
                     &nbsp;
-                    <input type="text" ref={this.ref_startdate} className="form-control" placeholder="Start Date" />
+                    <input name="StartDate" onChange={this.bind} type="text" ref={this.ref_startdate} className="form-control" placeholder="Start Date" />
                     &nbsp;
-                    <input type="text" ref={this.ref_enddate} className="form-control" placeholder="End Date" />
+                    <input name="EndDate" onChange={this.bind} type="text" ref={this.ref_enddate} className="form-control" placeholder="End Date" />
                     &nbsp;
-                    <input type="text" className="form-control" placeholder="Group" />
+                    <input name="Group" onChange={this.bind} type="text" className="form-control" placeholder="Group" />
                     &nbsp;
-                    <input type="text" className="form-control" placeholder="Comment" />
+                    <input name="Commnent" onChange={this.bind} type="text" className="form-control" placeholder="Comment" />
                     &nbsp;
-                    <button className='btn btn-sm btn-primary' title='add or update'>Update</button>
+                    <button onClick={this.updateEventClick} className='btn btn-sm btn-primary' title='add or update'>Update</button>
                     &nbsp;
                     <button className='btn btn-sm btn-danger' title='delete'>Delete</button>
                 </div>
@@ -45,13 +45,34 @@ class ReminderPanel extends React.Component {
         );
     }
 
+    setDatePicker = () => {
+        var self = this;
+        $(this.ref_startdate.current).datepicker({
+            onSelect: function (dateText, inst) {
+                var date = $(this).val();
+                self.ReminderObject["StartDate"] = date;
+            }
+        });
+
+        $(this.ref_enddate.current).datepicker({
+            onSelect: function (dateText, inst) {
+                var date = $(this).val();
+                self.ReminderObject["EndDate"] = date;
+            }
+        });
+    }
+
+    bind = (e) => {
+        this.ReminderObject[e.target.name] = e.target.value;
+        this.setState({ [e.target.name]: e.target.value });
+    }
+
     searchByName = (name) => {
         alert(this.txtDateTimePicker.current.value);
     }
 
-    setDatePicker = () => {
-        $(this.ref_startdate.current).datepicker();
-        $(this.ref_enddate.current).datepicker();
+    updateEventClick = (e) => {
+        console.log(this.ReminderObject);
     }
 }
 
