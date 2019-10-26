@@ -17,7 +17,7 @@ class AccountPanel extends React.Component {
         var self = this;
         $(document).ready(function () {
             if (window.location.href.indexOf('Dashboard/Account') > 0) {
-                $("#menuAcct").css("color", "black");
+                $("#menuAcct").css("color", "salmon");
             }
             self.fillGrid(self);
         });

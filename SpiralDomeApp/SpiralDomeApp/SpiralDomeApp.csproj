@@ -125,6 +125,7 @@
     <Content Include="Global.asax" />
     <Content Include="Scripts\AppServices\AccountService.js" />
     <Content Include="Scripts\AppServices\LoginService.js" />
+    <Content Include="Scripts\AppServices\ReminderService.js" />
     <Content Include="Scripts\babel.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />

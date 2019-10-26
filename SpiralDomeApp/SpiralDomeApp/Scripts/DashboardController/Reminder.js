@@ -7,6 +7,7 @@ class ReminderPanel extends React.Component {
         this.ref_startdate = React.createRef();
         this.ref_enddate = React.createRef();
         this.ReminderObject = { Name: "", StartDate: null, EndDate: null, Group: null, Comment: null };
+        this.reminderSvc = new ReminderService();
     }
 
     render() {
@@ -16,7 +17,7 @@ class ReminderPanel extends React.Component {
         $(document).ready(function () {
             self.setDatePicker();
             if (window.location.href.indexOf('Dashboard/Reminder') > 0) {
-                $("#menuReminder").css("color", "black");
+                $("#menuReminder").css("color", "salmon");
             }
         });
 
@@ -72,8 +73,26 @@ class ReminderPanel extends React.Component {
     }
 
     updateEventClick = (e) => {
-        console.log(this.ReminderObject);
+        var self = this;
+        this.reminderSvc.UpdateReminder(this.ReminderObject, function (result) {
+            if (result.IsSuccess) {
+                //self.fillGrid(self);
+            }
+            else {
+                alert(result.Message);
+            }
+        }
+        );
     }
+
+
+    setControlValue = (ctrl, model, value) => {
+        if (value != null) {
+            ctrl.current.value = value.trim();
+            model[ctrl.current.name] = value.trim();
+        }
+    }
+
 }
 
 ReactDOM.render(<ReminderPanel />, ReminderPanelContainer);
