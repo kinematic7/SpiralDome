@@ -131,6 +131,7 @@
     <Content Include="Scripts\babel.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Content\pdf\Documents.pdf" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\DashboardController\Account.js" />
     <Content Include="Scripts\DashboardController\Reminder.js" />
