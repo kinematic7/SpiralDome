@@ -4,9 +4,15 @@ class ReminderPanel extends React.Component {
 
     constructor(props) {
         super(props);
+        this.today = new Date();
+        this.sdate = this.today.getMonth() + "/" + this.today.getDate() + "/" + this.today.getFullYear();
+        this.edate = this.sdate;
+        this.ref_name = React.createRef();
         this.ref_startdate = React.createRef();
         this.ref_enddate = React.createRef();
-        this.ReminderObject = { Name: "", StartDate: null, EndDate: null, Group: null, Comment: null };
+        this.ref_group = React.createRef();
+        this.ref_comment = React.createRef();
+        this.ReminderObject = { Name: "", StartDate: this.sdate, EndDate: this.edate, Group: "", Comment: " " };
         this.reminderSvc = new ReminderService();
     }
 
@@ -29,15 +35,15 @@ class ReminderPanel extends React.Component {
                 <TopMenu ParentControl={this} />
                 <br/>
                 <div className="form-inline">
-                    <input name="Name" onChange={this.bind} type="text" className="form-control" placeholder="Name" />
+                    <input name="Name" ref={this.ref_name} onChange={this.bind} type="text" className="form-control" placeholder="Name" />
                     &nbsp;
-                    <input name="StartDate" onChange={this.bind} type="text" ref={this.ref_startdate} className="form-control" placeholder="Start Date" />
+                    <input name="StartDate" value={this.ReminderObject.StartDate} onChange={this.bind} type="text" ref={this.ref_startdate} className="form-control" placeholder="Start Date" />
                     &nbsp;
-                    <input name="EndDate" onChange={this.bind} type="text" ref={this.ref_enddate} className="form-control" placeholder="End Date" />
+                    <input name="EndDate" value={this.ReminderObject.EndDate} onChange={this.bind} type="text" ref={this.ref_enddate} className="form-control" placeholder="End Date" />
                     &nbsp;
-                    <input name="Group" onChange={this.bind} type="text" className="form-control" placeholder="Group" />
+                    <input name="Group" ref={this.ref_group} onChange={this.bind} type="text" className="form-control" placeholder="Group" />
                     &nbsp;
-                    <input name="Commnent" onChange={this.bind} type="text" className="form-control" placeholder="Comment" />
+                    <input name="Comment" ref={this.ref_comment} onChange={this.bind} type="text" className="form-control" placeholder="Comment" />
                     &nbsp;
                     <button onClick={this.updateEventClick} className='btn btn-sm btn-primary' title='add or update'>Update</button>
                     &nbsp;
@@ -78,6 +84,11 @@ class ReminderPanel extends React.Component {
         this.reminderSvc.UpdateReminder(this.ReminderObject, function (result) {
             if (result.IsSuccess) {
                 self.fillGrid(self);
+                self.setControlValue(self.ref_name, self.ReminderObject, "");
+                self.setControlValue(self.ref_startdate, self.ReminderObject, "");
+                self.setControlValue(self.ref_enddate, self.ReminderObject, "");
+                self.setControlValue(self.ref_group, self.ReminderObject, "");
+                self.setControlValue(self.ref_comment, self.ReminderObject, "");
             }
             else {
                 alert(result.Message);
@@ -91,6 +102,11 @@ class ReminderPanel extends React.Component {
         this.reminderSvc.DeleteReminder(this.ReminderObject, function (result) {
             if (result.IsSuccess) {
                 self.fillGrid(self);
+                self.setControlValue(self.ref_name, self.ReminderObject, "");
+                self.setControlValue(self.ref_startdate, self.ReminderObject, "");
+                self.setControlValue(self.ref_enddate, self.ReminderObject, "");
+                self.setControlValue(self.ref_group, self.ReminderObject, "");
+                self.setControlValue(self.ref_comment, self.ReminderObject, "");
             }
             else {
                 alert(result.Message);
@@ -123,16 +139,16 @@ class ReminderPanel extends React.Component {
                         }
                     },
                     rowClick: function (args) {
-                        self.setControlValue(self.ref_Name, self.AccountModel, args.item.Name);
-                        self.setControlValue(self.ref_Username, self.AccountModel, args.item.Username);
-                        self.setControlValue(self.ref_Password, self.AccountModel, args.item.Password);
-                        self.setControlValue(self.ref_Url, self.AccountModel, args.item.Url);
-                        self.setControlValue(self.ref_Comment, self.AccountModel, args.item.Comment);
+                        self.setControlValue(self.ref_name, self.ReminderObject, args.item.Name);
+                        self.setControlValue(self.ref_startdate, self.ReminderObject, args.item.StartDateGUI);
+                        self.setControlValue(self.ref_enddate, self.ReminderObject, args.item.EndDateGUI);
+                        self.setControlValue(self.ref_group, self.ReminderObject, args.item.Group);
+                        self.setControlValue(self.ref_comment, self.ReminderObject, args.item.Comment);
                     },
                     fields: [
                         { name: "Name", width: 150, filtering: true },
-                        { name: "StartDateGUI", type: "date", width: 150, filtering: true },
-                        { name: "EndDateGUI", type: "date", width: 150, filtering: true },
+                        { name: "StartDateGUI", title: "Start Date", type: "date", width: 150, filtering: true },
+                        { name: "EndDateGUI", title: "End Date", type: "date", width: 150, filtering: true },
                         { name: "Group", width: 150, filtering: true },
                         { name: "Comment", type: "text", width: 150, validate: "required" }
                     ]

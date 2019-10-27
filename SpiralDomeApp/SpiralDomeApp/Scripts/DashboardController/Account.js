@@ -9,7 +9,7 @@ class AccountPanel extends React.Component {
         this.ref_Username = React.createRef();
         this.ref_Password = React.createRef();
         this.ref_Comment = React.createRef();
-        this.AccountModel = { Name: "", Url: "", Username: "", Password: "", Comment: "" }
+        this.AccountModel = { Name: "", Url: "", Username: "", Password: "", Comment: " " }
         this.actSvc = new AccountService();
     }
 
