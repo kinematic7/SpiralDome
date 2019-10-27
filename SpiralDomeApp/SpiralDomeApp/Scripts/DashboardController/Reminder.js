@@ -18,6 +18,7 @@ class ReminderPanel extends React.Component {
             self.setDatePicker();
             if (window.location.href.indexOf('Dashboard/Reminder') > 0) {
                 $("#menuReminder").css("color", "salmon");
+                self.fillGrid(self);
             }
         });
 
@@ -40,7 +41,7 @@ class ReminderPanel extends React.Component {
                     &nbsp;
                     <button onClick={this.updateEventClick} className='btn btn-sm btn-primary' title='add or update'>Update</button>
                     &nbsp;
-                    <button className='btn btn-sm btn-danger' title='delete'>Delete</button>
+                    <button onClick={this.deleteEventClick} className='btn btn-sm btn-danger' title='delete'>Delete</button>
                 </div>
             </React.Fragment>
         );
@@ -76,7 +77,7 @@ class ReminderPanel extends React.Component {
         var self = this;
         this.reminderSvc.UpdateReminder(this.ReminderObject, function (result) {
             if (result.IsSuccess) {
-                //self.fillGrid(self);
+                self.fillGrid(self);
             }
             else {
                 alert(result.Message);
@@ -85,6 +86,17 @@ class ReminderPanel extends React.Component {
         );
     }
 
+    deleteEventClick = (e) => {
+        var self = this;
+        this.reminderSvc.DeleteReminder(this.ReminderObject, function (result) {
+            if (result.IsSuccess) {
+                self.fillGrid(self);
+            }
+            else {
+                alert(result.Message);
+            }
+        });
+    }
 
     setControlValue = (ctrl, model, value) => {
         if (value != null) {
@@ -93,6 +105,40 @@ class ReminderPanel extends React.Component {
         }
     }
 
+    fillGrid = (self, searchByNameFilter) => {
+
+        self.reminderSvc.GetReminderDatabyLoginId({ LoginId: localStorage.getItem("LoginId"), Token: localStorage.getItem("Token"), SearchByName: searchByNameFilter },
+            function (result) {
+                var clients = result.JsonObject.Data;
+                $("#jsGrid").jsGrid({
+                    width: "100%",
+                    height: "705px",
+                    pageSize: 17,
+                    sorting: true,
+                    paging: true,
+                    autoload: true,
+                    controller: {
+                        loadData: function () {
+                            return clients;
+                        }
+                    },
+                    rowClick: function (args) {
+                        self.setControlValue(self.ref_Name, self.AccountModel, args.item.Name);
+                        self.setControlValue(self.ref_Username, self.AccountModel, args.item.Username);
+                        self.setControlValue(self.ref_Password, self.AccountModel, args.item.Password);
+                        self.setControlValue(self.ref_Url, self.AccountModel, args.item.Url);
+                        self.setControlValue(self.ref_Comment, self.AccountModel, args.item.Comment);
+                    },
+                    fields: [
+                        { name: "Name", width: 150, filtering: true },
+                        { name: "StartDateGUI", type: "date", width: 150, filtering: true },
+                        { name: "EndDateGUI", type: "date", width: 150, filtering: true },
+                        { name: "Group", width: 150, filtering: true },
+                        { name: "Comment", type: "text", width: 150, validate: "required" }
+                    ]
+                });
+            });
+    }
 }
 
 ReactDOM.render(<ReminderPanel />, ReminderPanelContainer);

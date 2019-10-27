@@ -2,6 +2,7 @@
 using SpiralDomeApp.Models;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -161,6 +162,47 @@ namespace SpiralDomeApp.Controllers
         {
             return View();
         }
+
+        [HttpPost]
+        public JsonResult GetReminderDatabyLoginId(Login obj)
+        {
+            CallStatus status = new CallStatus();
+            try
+            {
+                if (GenericHelper.IsAuthenticToken(obj.LoginId, obj.Token))
+                {
+                    using (var context = new SpiralDomeDbContext())
+                    {
+                        obj.SearchByName = obj.SearchByName == null ? "" : obj.SearchByName;
+                        var res = (from account in context.Reminders
+                                   where account.LoginId == obj.LoginId && account.Name.Contains(obj.SearchByName)
+                                   select account).OrderBy(x => x.Group).ThenBy(x=>x.Name).ToList();
+
+
+                        for (int i = 0; i < res.Count(); i++)
+                        {
+                            res[i].StartDateGUI = String.Format("{0:MM/dd/yyyy}", res[i].StartDate);
+                            res[i].EndDateGUI =  String.Format("{0:MM/dd/yyyy}", res[i].EndDate);
+                        }
+
+
+                        status.IsSuccess = true;
+                        status.JsonObject = Json(res);
+                    }
+                }
+                else
+                {
+                    throw new Exception("Invalid Authentication Token");
+                }
+            }
+            catch (Exception ex)
+            {
+                status.IsSuccess = false;
+                status.Message = ex.Message;
+            }
+            return Json(status);
+        }
+
 
         [HttpPost]
         public JsonResult InsertNewReminder(Reminder obj)

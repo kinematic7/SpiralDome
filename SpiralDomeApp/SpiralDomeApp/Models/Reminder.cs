@@ -15,6 +15,12 @@ namespace SpiralDomeApp.Models
         public string Group { get; set; }
         public string Comment { get; set; }
         public string LoginId { get; set; }
+        
+        [NotMapped]
+        public string StartDateGUI { get; set; }
+
+        [NotMapped]
+        public string EndDateGUI { get; set; }
 
         [NotMapped]
         public string Token { get; set; }

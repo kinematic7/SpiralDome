@@ -1,6 +1,6 @@
 ﻿class ReminderService {
 
-    GetAccountDatabyLoginId = (loginObj, callback) => {
+    GetReminderDatabyLoginId = (loginObj, callback) => {
 
         $.post("../Dashboard/GetReminderDatabyLoginId", loginObj, function (result) {
             callback(result);
