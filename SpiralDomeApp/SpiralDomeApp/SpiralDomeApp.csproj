@@ -110,6 +110,7 @@
     <Content Include="Content\images\logout.svg" />
     <Content Include="Content\images\notes.svg" />
     <Content Include="Content\images\reminders.svg" />
+    <Content Include="Content\images\resume.svg" />
     <Content Include="Content\images\search.svg" />
     <Content Include="Content\images\secondlogo.png" />
     <Content Include="Content\images\settings.svg" />
