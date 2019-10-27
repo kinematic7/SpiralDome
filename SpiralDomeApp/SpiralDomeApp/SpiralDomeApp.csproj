@@ -134,6 +134,7 @@
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Content\pdf\Documents.pdf" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
+    <Content Include="Scripts\DashboardController\Document.js" />
     <Content Include="Scripts\DashboardController\Account.js" />
     <Content Include="Scripts\DashboardController\Reminder.js" />
     <Content Include="Scripts\DashboardController\TopMenu.js" />
@@ -238,6 +239,7 @@
     <Content Include="Scripts\jquery-3.3.1.min.map" />
     <Content Include="Views\Dashboard\Account.cshtml" />
     <Content Include="Views\Dashboard\Reminder.cshtml" />
+    <Content Include="Views\Dashboard\Document.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

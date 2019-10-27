@@ -313,5 +313,10 @@ namespace SpiralDomeApp.Controllers
             return Json(status);
         }
 
+        public ActionResult Document()
+        {
+            return View();
+        }
+
     }
 }
