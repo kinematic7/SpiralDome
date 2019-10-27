@@ -75,8 +75,8 @@ class ReminderPanel extends React.Component {
         this.setState({ [e.target.name]: e.target.value });
     }
 
-    searchByName = (name) => {
-        alert(this.txtDateTimePicker.current.value);
+    searchByName = (searchValue) => {
+        this.fillGrid(this, searchValue);
     }
 
     updateEventClick = (e) => {
