@@ -16,5 +16,6 @@ namespace SpiralDomeApp.Models
         public DbSet<Login> Logins { get; set; }
         public DbSet<Account> Accounts { get; set; }
         public DbSet<Reminder> Reminders { get; set; }
+        public DbSet<DocumentImage> DocumentImages { get; set; }
     }
 }

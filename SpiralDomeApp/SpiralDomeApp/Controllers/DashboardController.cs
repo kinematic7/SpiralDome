@@ -2,7 +2,10 @@
 using SpiralDomeApp.Models;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.Drawing;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -315,8 +318,44 @@ namespace SpiralDomeApp.Controllers
 
         public ActionResult Document()
         {
+           
             return View();
         }
+
+        [HttpPost]
+        public JsonResult AddDocuments(Login login)
+        {
+            CallStatus status = new CallStatus();
+
+            try
+            {
+                string[] fileList = Directory.GetFiles(ConfigurationManager.AppSettings["DocumentPath"],
+                                                      ConfigurationManager.AppSettings["DocumentType"]);
+                for (int i = 0; i < fileList.Length; i++)
+                {
+                    var imageData = GenericHelper.ImageToByteArray(fileList[i]);
+                    using (var context = new SpiralDomeDbContext())
+                    {
+                        DocumentImage obj = new DocumentImage()
+                        {
+                            ImageData = imageData,
+                            Name = fileList[i].Split('\\')[fileList[i].Split('\\').Length - 1],
+                            LoginId = login.LoginId
+                        };
+                        context.DocumentImages.Add(obj);
+                        context.SaveChanges();
+                    }
+                }
+                status.IsSuccess = true;
+            }
+            catch (Exception ex)
+            {
+                status.IsSuccess = false;
+                status.Message = ex.Message;
+            }
+            return Json(status);
+        }
+
 
     }
 }

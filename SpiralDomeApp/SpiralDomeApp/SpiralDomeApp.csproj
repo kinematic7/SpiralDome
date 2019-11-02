@@ -213,9 +213,14 @@
     <Compile Include="Migrations\201910251829548_Reminder3.Designer.cs">
       <DependentUpon>201910251829548_Reminder3.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201910300122364_DocumentImage.cs" />
+    <Compile Include="Migrations\201910300122364_DocumentImage.Designer.cs">
+      <DependentUpon>201910300122364_DocumentImage.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Account.cs" />
     <Compile Include="Models\CallStatus.cs" />
+    <Compile Include="Models\DocumentImage.cs" />
     <Compile Include="Models\Login.cs" />
     <Compile Include="Models\Reminder.cs" />
     <Compile Include="Models\SprialDomeDbContext.cs" />
@@ -289,6 +294,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201910251829548_Reminder3.resx">
       <DependentUpon>201910251829548_Reminder3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201910300122364_DocumentImage.resx">
+      <DependentUpon>201910300122364_DocumentImage.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

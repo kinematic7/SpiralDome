@@ -2,6 +2,8 @@
 using System;
 using System.Collections.Generic;
 using System.Data.Entity.Validation;
+using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Web;
 
@@ -46,6 +48,29 @@ namespace SpiralDomeApp.Helper
             }
 
             return retVal;
+        }
+
+        public static byte[] ImageToByteArray(string path)
+        {
+            FileInfo fileInfo = new FileInfo(path);
+
+            byte[] data = new byte[fileInfo.Length];
+
+            using (FileStream fs = fileInfo.OpenRead())
+            {
+                fs.Read(data, 0, data.Length);
+            }
+
+            // Delete the temporary file
+            fileInfo.Delete();
+            return data;
+        }
+
+        public static Image ByteArrayToImage(byte[] byteArrayIn)
+        {
+            MemoryStream ms = new MemoryStream(byteArrayIn);
+            Image returnImage = Image.FromStream(ms);
+            return returnImage;
         }
 
     }
