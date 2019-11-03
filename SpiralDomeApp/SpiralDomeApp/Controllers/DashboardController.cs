@@ -318,7 +318,6 @@ namespace SpiralDomeApp.Controllers
 
         public ActionResult Document()
         {
-           
             return View();
         }
 
@@ -347,6 +346,43 @@ namespace SpiralDomeApp.Controllers
                     }
                 }
                 status.IsSuccess = true;
+            }
+            catch (Exception ex)
+            {
+                status.IsSuccess = false;
+                status.Message = ex.Message;
+            }
+            return Json(status);
+        }
+
+        [HttpPost]
+        public JsonResult GetDocumentsbyLoginId(Login obj)
+        {
+            CallStatus status = new CallStatus();
+            try
+            {
+                if (GenericHelper.IsAuthenticToken(obj.LoginId, obj.Token))
+                {
+                    using (var context = new SpiralDomeDbContext())
+                    {
+                        obj.SearchByName = obj.SearchByName == null ? "" : obj.SearchByName;
+                        var res = (from document in context.DocumentImages
+                                   where document.LoginId == obj.LoginId && document.Name.Contains(obj.SearchByName)
+                                   select document).OrderBy(x => x.Name).ToList();
+
+                        foreach(var doc in res)
+                        {
+                            doc.ImageBase64 = Convert.ToBase64String(doc.ImageData);
+                        }
+
+                        status.IsSuccess = true;
+                        status.JsonObject = Json(res);
+                    }
+                }
+                else
+                {
+                    throw new Exception("Invalid Authentication Token");
+                }
             }
             catch (Exception ex)
             {

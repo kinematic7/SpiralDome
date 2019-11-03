@@ -127,6 +127,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Scripts\AppServices\AccountService.js" />
+    <Content Include="Scripts\AppServices\DocumentService.js" />
     <Content Include="Scripts\AppServices\LoginService.js" />
     <Content Include="Scripts\AppServices\ReminderService.js" />
     <Content Include="Scripts\babel.js" />
