@@ -22,7 +22,9 @@ class TopMenu extends React.Component {
                         <li className="page-item"><a className="page-link" href='#'> <input ref={this.refSearchByName} onChange={this.searchAction } type='text' className='form-control' placeholder='Search by Name' /></a> &nbsp;</li>
                         <li onClick={this.accountAction} className="page-item"><a id="menuAcct" className="page-link" href="#"> <img style={imgIcon} src='../Content/images/account.svg'></img> Accs</a></li>
                         <li onClick={this.reminderAction}><a className="page-link" id="menuReminder" href="#"><img style={imgIcon} src='../Content/images/reminders.svg'></img> Rems</a></li>
-                        <li onClick={this.documentAction}><a className="page-link" id="menuDoc" href="#"><img style={imgIcon} src='../Content/images/documents.svg'></img> Docs</a></li>                   
+                        <li onClick={this.documentAction}><a className="page-link" id="menuDoc" href="#"><img style={imgIcon} src='../Content/images/documents.svg'></img> Docs</a></li>      
+                        <li onClick={this.emailAction}><a className="page-link" id="menuMail" href="#"><img style={imgIcon} src='../Content/images/email.svg'></img> Mail</a></li> 
+                        <li onClick={this.weatherAction}><a className="page-link" id="menuMail" href="#"><img style={imgIcon} src='../Content/images/weather.svg'></img> Temp</a></li>  
                         <li onClick={this.logoutAction}><a className="page-link" href="#"><img style={imgIcon} src='../Content/images/logout.svg'></img> Logout</a></li>
                     </ul>
                 </nav>
@@ -40,6 +42,14 @@ class TopMenu extends React.Component {
 
     documentAction = (e) => {
         window.location.href = "../Dashboard/Document";
+    }
+
+    emailAction = (e) => {
+        window.open("https://gmail.com");
+    }
+
+    weatherAction = (e) => {
+        window.open("https://www.google.com/search?q=weather");
     }
 
     resumeAction = (e) => {
