@@ -23,10 +23,10 @@ class TopMenu extends React.Component {
                         <li onClick={this.accountAction} className="page-item"><a id="menuAcct" className="page-link" href="#"> <img style={imgIcon} src='../Content/images/account.svg'></img> Accs</a></li>
                         <li onClick={this.reminderAction}><a className="page-link" id="menuReminder" href="#"><img style={imgIcon} src='../Content/images/reminders.svg'></img> Rems</a></li>
                         <li onClick={this.documentAction}><a className="page-link" id="menuDoc" href="#"><img style={imgIcon} src='../Content/images/documents.svg'></img> Docs</a></li>      
-                        <li onClick={this.emailAction}><a className="page-link" id="menuMail" href="#"><img style={imgIcon} src='../Content/images/email.svg'></img> Mail</a></li> 
-                        <li onClick={this.weatherAction}><a className="page-link" id="menuMail" href="#"><img style={imgIcon} src='../Content/images/weather.svg'></img> Temp</a></li>  
+                        <li onClick={this.emailAction}><a className="page-link" id="menuMail" href="#"><img style={imgIcon} src='../Content/images/email.svg'></img> Mail</a></li>   
                         <li onClick={this.logoutAction}><a className="page-link" href="#"><img style={imgIcon} src='../Content/images/logout.svg'></img> Logout</a></li>
-                    </ul>
+                        <a target="_blank" href="https://www.booked.net/weather/newark-3896"><img src="https://w.bookcdn.com/weather/picture/12_3896_0_1_2071c9_118_2071c9_ffffff_ffffff_0_2071c9_ffffff_0_6.png?scode=2&domid=w209&anc_id=93648" alt="booked.net" /></a>
+                       </ul>
                 </nav>
             </React.Fragment>
             );
