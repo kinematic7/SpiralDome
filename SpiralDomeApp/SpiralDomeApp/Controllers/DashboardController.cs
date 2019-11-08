@@ -366,9 +366,22 @@ namespace SpiralDomeApp.Controllers
                     using (var context = new SpiralDomeDbContext())
                     {
                         obj.SearchByName = obj.SearchByName == null ? "" : obj.SearchByName;
-                        var res = (from document in context.DocumentImages
-                                   where document.LoginId == obj.LoginId && document.Name.Contains(obj.SearchByName)
-                                   select document).OrderBy(x => x.Name).ToList();
+
+
+
+                        var res = 
+                            
+                            obj.SearchByName == "" ?
+
+                            (from document in context.DocumentImages
+                                   where document.LoginId == obj.LoginId && document.Name.Contains("Divorce") == false 
+                                   select document).OrderBy(x => x.Name).ToList()
+                            :
+
+                             (from document in context.DocumentImages
+                              where document.LoginId == obj.LoginId && document.Name.Contains(obj.SearchByName)
+                              select document).OrderBy(x => x.Name).ToList()
+                           ;
 
                         foreach(var doc in res)
                         {
